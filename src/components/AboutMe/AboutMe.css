@@ -62,50 +62,6 @@
   border-radius: 10px;
 }
 
-.portfolio__title {
-  margin: 0 0 50px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 20px;
-  color: #a0a0a0;
-}
-
-.portfolio__list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.portfolio__item {
-  margin-bottom: 19px;
-  border-bottom: 1px solid #e8e8e8;
-}
-
-.portfolio__item:last-of-type {
-  margin-bottom: 0;
-  border-bottom: none;
-}
-
-.portfolio__link {
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-  text-decoration: none;
-  font-size: 30px;
-  line-height: 50px;
-  letter-spacing: -0.04em;
-  color: #000000;
-}
-.portfolio__link-arrow {
-  font-size: 30px;
-  line-height: 60px;
-  letter-spacing: -0.04em;
-}
-
 @media (min-width: 768px) and (max-width: 991px) {
   .aboutme-container {
     padding: 90px 0;
