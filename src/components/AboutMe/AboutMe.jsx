@@ -40,9 +40,10 @@ const AboutMe = () => {
           <ul className="portfolio__list">
             <li className="portfolio__item">
               <a
-                href="#"
+                href="https://spacestrix.github.io/how-to-learn/"
                 className="portfolio__link link_effect"
                 target={"_blank"}
+                rel="noreferrer"
               >
                 Статичный сайт
                 <span className="portfolio__link-arrow">↗</span>
@@ -50,9 +51,10 @@ const AboutMe = () => {
             </li>
             <li className="portfolio__item">
               <a
-                href="#"
+                href="https://spacestrix.github.io/russian-travel/"
                 className="portfolio__link link_effect"
                 target={"_blank"}
+                rel="noreferrer"
               >
                 Адаптивный сайт
                 <span className="portfolio__link-arrow">↗</span>
@@ -60,9 +62,10 @@ const AboutMe = () => {
             </li>
             <li className="portfolio__item">
               <a
-                href="#"
+                href="https://spacestrix.github.io/mesto-react/"
                 className="portfolio__link link_effect"
                 target={"_blank"}
+                rel="noreferrer"
               >
                 Одностраничное приложение
                 <span className="portfolio__link-arrow">↗</span>

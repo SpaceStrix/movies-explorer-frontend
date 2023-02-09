@@ -88,8 +88,74 @@
 /*  @media */
 
 @media (min-width: 768px) and (max-width: 991px) {
+  .about-project-section {
+    padding: 90px 0;
+    width: calc(100% - 50px * 2);
+  }
+  .about-project__title {
+    padding-bottom: 20px;
+  }
+  .about-project-stage {
+    margin: 70px 0 93px;
+    gap: 30px;
+  }
+  .about-project-item__title {
+    margin: 0 0 22px;
+  }
+
+  .about-project-item__descr {
+    font-size: 12px;
+    line-height: 18px;
+  }
 }
 @media (min-width: 480px) and (max-width: 767px) {
 }
 @media (min-width: 320px) and (max-width: 479px) {
+  .about-project-section {
+    padding: 72px 0;
+    width: calc(100% - 18px * 2);
+  }
+  .about-project__title {
+    padding-bottom: 28px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .about-project-item {
+    width: 100%;
+  }
+  .about-project-stage {
+    margin: 60px 0 60px;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .about-project-item__title {
+    margin: 0 0 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project-item__descr {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-times-backend {
+    width: 39%;
+  }
+
+  .about-times-frontend {
+    width: 71%;
+  }
+
+  .about-times-backend__week,
+  .about-times-frontend__week {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-times-backend__name,
+  .about-times-frontend__name {
+    font-size: 11px;
+    line-height: 13px;
+  }
 }
