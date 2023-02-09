@@ -1,16 +1,16 @@
 import Promo from "../Promo/Promo";
 import AboutProject from "../AboutProject/AboutProject";
-import Technologies from "../Technologies/Technologies";
+import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 
 const Main = () => {
   return (
-    <>
+    <main className="main">
       <Promo />
       <AboutProject />
-      <Technologies />
+      <Techs />
       <AboutMe />
-    </>
+    </main>
   );
 };
 

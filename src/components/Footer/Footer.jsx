@@ -14,7 +14,7 @@ const Footer = () => {
               <a
                 href="https://practicum.yandex.ru/"
                 target={"_blank"}
-                className="footer-list__link"
+                className="footer-list__link link_effect"
                 rel="noreferrer"
               >
                 Яндекс.Практикум
@@ -24,7 +24,7 @@ const Footer = () => {
               <a
                 href="https://github.com/"
                 target={"_blank"}
-                className="footer-list__link"
+                className="footer-list__link link_effect"
                 rel="noreferrer"
               >
                 Github

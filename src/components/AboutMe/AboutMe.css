@@ -1,114 +1,101 @@
+.aboutme {
+  max-width: 1280px;
+}
 .aboutme-container {
-  padding: 110px 70px 125px;
   margin: 0 auto;
-  max-width: 1140px;
+  padding: 110px 0 125px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 70px * 2);
 }
 
 .aboutme__title {
   margin: 0;
-  padding-bottom: 23px;
+  padding-bottom: 24px;
   border-bottom: 1px solid #000;
   font-weight: 400;
   font-size: 22px;
   line-height: 27px;
   letter-spacing: -0.04em;
+  color: #000000;
 }
 
 .aboutme-info {
   margin: 66px 0 100px;
-
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.aboutme-text {
+.aboutme-info-bio {
   max-width: 600px;
 }
-
-.aboutme-text__name {
+.aboutme-info-bio__name {
   margin: 0 0 18px;
-  font-style: normal;
-  font-weight: 400;
   font-size: 50px;
   line-height: 58px;
   letter-spacing: -0.04em;
 }
-.aboutme-text__proff {
+.aboutme-info-bio__proff {
   margin: 0 0 26px;
-  font-style: normal;
-  font-weight: 500;
   font-size: 18px;
   line-height: 20px;
-  mix-blend-mode: normal;
 }
-.aboutme-text__descr {
+.aboutme-info-bio__descr {
   margin: 0 0 99px;
-  font-style: normal;
-  font-weight: 400;
   font-size: 14px;
   line-height: 22px;
-  mix-blend-mode: normal;
 }
-.aboutme-text__git {
-  font-style: normal;
+
+.aboutme-info-bio__git {
+  text-decoration: none;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-  text-decoration: none;
-  color: #000000;
+  color: #000;
 }
-
-.aboutme-photo {
-  width: 270px;
-  height: 327px;
+.aboutme-info__photo {
+  max-width: 270px;
+  max-height: 327px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
-.aboutme-portfolio__title {
+.portfolio__title {
   margin: 0 0 50px;
+  font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
   color: #a0a0a0;
-  mix-blend-mode: normal;
 }
 
-.aboutme-list {
-  margin: 0;
-  padding: 0;
+.portfolio__list {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
-.aboutme-list__item {
-  width: 100%;
-  padding-bottom: 20px;
+.portfolio__item {
+  margin-bottom: 19px;
   border-bottom: 1px solid #e8e8e8;
 }
-.aboutme-list__item:last-of-type {
-  border: none;
-  padding-bottom: 0;
-}
 
-.aboutme-list__link {
+.portfolio__link {
   display: flex;
   align-content: center;
   justify-content: space-between;
-
   text-decoration: none;
-  font-weight: 400;
   font-size: 30px;
   line-height: 50px;
   letter-spacing: -0.04em;
   color: #000000;
 }
-
-.aboutme-list__simbol {
-  font-weight: 400;
+.portfolio__link-arrow {
   font-size: 30px;
   line-height: 60px;
   letter-spacing: -0.04em;
-  color: #000000;
 }
