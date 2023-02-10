@@ -1,7 +1,7 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
 
-body {
+/* body {
   margin: 0;
   font-family: "Inter", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell";
   color: #000000;
@@ -11,4 +11,18 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+} */
+/* 
+:root {
+  --color: #000;
+  --color-green: #2be080;
+  --color-gray: #c4c4c4;
 }
+
+body {
+  margin: 0 auto;
+  max-width: 1280px;
+  font-family: "Inter", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell";
+
+  color: var(--color);
+} */

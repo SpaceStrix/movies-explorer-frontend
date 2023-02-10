@@ -1,26 +1,33 @@
-.App {
+/* .App {
   text-align: center;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
+} */
+
+:root {
+  --color: #000;
+  --color-green: #2be080;
+  --color-gray: #f9f9f9;
+  --color-hover-gray: #e0e0e0;
 }
 
-#root {
-  max-width: 1280px;
-  height: 100vh;
-  background-color: rgb(65, 63, 63);
+body {
   margin: 0 auto;
-  background-color: #fff;
+  max-width: 1280px;
+  font-family: "Inter", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell";
+
+  color: var(--color);
 }

@@ -1,6 +1,6 @@
 import "./AboutMe.css";
 import Portfolio from "../Portfolio/Portfolio";
-import mePhoto from "../../images/photo.png";
+import mePhoto from "../../../images/photo.png";
 
 const AboutMe = () => {
   return (

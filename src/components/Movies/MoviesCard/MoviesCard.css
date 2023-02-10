@@ -1,0 +1,50 @@
+.card {
+  width: 100%;
+  background: #fdfdfd;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  max-height: 203px;
+  object-fit: cover;
+}
+
+.card__content {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+.card__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+}
+.card__duration {
+  margin: 0;
+  font-size: 11px;
+  line-height: 13px;
+  color: #a0a0a0;
+}
+
+.card__like {
+  margin: 4px 8px 8px;
+  width: 14px;
+  height: 12px;
+  background: url(../../../images/like.svg) no-repeat center center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+/* активный лайк */
+.card__like:hover {
+  background: url(../../../images/like-active.svg) no-repeat center center;
+}
