@@ -8,7 +8,7 @@
   width: calc(100% - 70px * 2);
 }
 
-.moviecardlist__items {
+/* .moviecardlist__items {
   margin: 0;
   padding: 0;
   column-gap: 24px;
@@ -17,7 +17,7 @@
   grid-template-columns: repeat(auto-fill, minmax(281px, 1fr));
   justify-items: center;
   list-style: none;
-}
+} */
 
 .moviecardlist__more {
   padding: 60px 0 80px;

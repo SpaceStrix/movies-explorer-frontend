@@ -1,6 +1,6 @@
 import "./SearchForm.css";
 
-const SearchForm = () => {
+export const SearchForm = () => {
   return (
     <section className="seachform">
       <div className="seachform-container">
@@ -22,4 +22,3 @@ const SearchForm = () => {
     </section>
   );
 };
-export default SearchForm;

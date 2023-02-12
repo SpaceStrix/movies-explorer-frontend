@@ -1,19 +1,20 @@
 import "./Header.css";
 
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export const Header = () => {
   return (
     <header className="header">
       <div className="header-container">
-        <a href="/" className="header__logo" target="_blank"></a>
+        <NavLink to="/" className="header__logo"></NavLink>
         <nav className="navbar">
-          <a href="/signup" className="navbar__link link_effect">
+          <NavLink to="/signup" className="navbar__link link_effect">
             Регистрация
-          </a>
-          <a href="/signin" className="navbar__link active_link">
+          </NavLink>
+          <NavLink to="/signin" className="navbar__link active_link">
             Войти
-          </a>
+          </NavLink>
         </nav>
       </div>
     </header>

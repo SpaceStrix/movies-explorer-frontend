@@ -1,0 +1,20 @@
+.savedmovies {
+  max-width: 1280px;
+}
+.savedmovies-container {
+  margin: 0 auto;
+  padding: 70px 0 107px;
+  width: calc(100% - 70px * 2);
+}
+
+/* movie list общие стили */
+.movie_list {
+  margin: 0;
+  padding: 0;
+  column-gap: 24px;
+  row-gap: 37px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(281px, 1fr));
+  justify-items: center;
+  list-style: none;
+}
