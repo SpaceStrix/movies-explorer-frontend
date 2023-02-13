@@ -18,7 +18,7 @@
 } */
 
 :root {
-  --color: #000;
+  --color-black: #000;
   --color-green: #2be080;
   --color-gray: #f9f9f9;
   --color-hover-gray: #e0e0e0;
@@ -29,5 +29,5 @@ body {
   max-width: 1280px;
   font-family: "Inter", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell";
 
-  color: var(--color);
+  color: var(--color-black);
 }

@@ -1,7 +1,7 @@
 import "./App.css";
 
-import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
@@ -14,6 +14,13 @@ import { Login } from "../Login/Login";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // Хук useLocation возвращает объект текущего местоположения
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log("Current location is ", location.pathname);
+  }, [location]);
+
   return (
     <>
       <Header />
@@ -21,8 +28,8 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register loggedIn={loggedIn} />} />
+        <Route path="/signin" element={<Login loggedIn={loggedIn} />} />
       </Routes>
       <Footer />
     </>
