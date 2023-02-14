@@ -1,33 +1,63 @@
 import "./Profile.css";
 
-export const Profile = () => {
-  return (
-    <section className="profile">
-      <div className="profile-container">
-        <form action="" className="profile-form">
-          <fieldset className="signup__group">
-            <legend className="signup__title">Вход</legend>
-            <input
-              name="email"
-              type="email"
-              placeholder="Email"
-              className="signup__input"
-              required
-            />
+import { Header } from "../Header/Header";
+import { useState } from "react";
 
-            <input
-              name="password"
-              type="password"
-              placeholder="Пароль"
-              className="signup__input"
-              required
-            />
-          </fieldset>
-          <button className="signup__btn-auth" type="submit">
-            Войти
+export const Profile = ({ loggedIn }) => {
+  const [name, setName] = useState("Your Name");
+  const [email, setEmail] = useState("youremail@gmail.com");
+
+  const handleChangeName = e => {
+    setName(e.target.value);
+  };
+  const handleChangeEmail = e => {
+    setEmail(e.target.value);
+  };
+
+  return (
+    <>
+      <Header loggedIn={loggedIn} />
+      <section className="profile">
+        <div className="profile-container">
+          <form action="" className="profile-form">
+            <fieldset className="profile__group">
+              <legend className="profile__title">Привет, Your Name</legend>
+              <label htmlFor="profile__name" className="profile__lable">
+                <span className="profile__input-title">Имя</span>
+                <input
+                  id="profile__name"
+                  name="name"
+                  type="name"
+                  placeholder={"Your Name"}
+                  className="profile__input"
+                  required
+                  value={name}
+                  onChange={handleChangeName}
+                />
+              </label>
+              <label htmlFor="profile__email" className="profile__lable">
+                <span className="profile__input-title">Email</span>
+                <input
+                  id="profile__email"
+                  name="email"
+                  type="email"
+                  placeholder={"youremail@mail.com"}
+                  className="profile__input"
+                  required
+                  value={email}
+                  onChange={handleChangeEmail}
+                />
+              </label>
+            </fieldset>
+            <button className="profile__btn-edit" type="submit">
+              Редактировать
+            </button>
+          </form>
+          <button className="profile__btn-logout" type="submit">
+            Выйти из аккаунта
           </button>
-        </form>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 };

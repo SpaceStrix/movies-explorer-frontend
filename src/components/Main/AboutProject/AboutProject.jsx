@@ -1,6 +1,6 @@
 import "./AboutProject.css";
 
-const AboutProject = () => {
+export const AboutProject = () => {
   return (
     <section className="about-project" id="about-project">
       <div className="about-project-section">
@@ -39,5 +39,3 @@ const AboutProject = () => {
     </section>
   );
 };
-
-export default AboutProject;

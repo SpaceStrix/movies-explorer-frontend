@@ -2,7 +2,7 @@ import "./AboutMe.css";
 import Portfolio from "../Portfolio/Portfolio";
 import mePhoto from "../../../images/photo.png";
 
-const AboutMe = () => {
+export const AboutMe = () => {
   return (
     <section className="aboutme" id="aboutme">
       <div className="aboutme-container">
@@ -40,5 +40,3 @@ const AboutMe = () => {
     </section>
   );
 };
-
-export default AboutMe;

@@ -1,6 +1,6 @@
 import "./Techs.css";
 
-const Techs = () => {
+export const Techs = () => {
   return (
     <section className="techs" id="techs">
       <div className="techs-container">
@@ -25,5 +25,3 @@ const Techs = () => {
     </section>
   );
 };
-
-export default Techs;

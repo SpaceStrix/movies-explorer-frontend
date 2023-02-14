@@ -16,7 +16,8 @@
   height: 38px;
 }
 
-.testburger {
+.testburger,
+.header-logged {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -157,6 +158,7 @@
 
     visibility: visible;
     opacity: 1;
+    transition: all 0.2s linear;
   }
   .testburger {
     display: flex;
@@ -173,6 +175,7 @@
 
     visibility: hidden;
     opacity: 0;
+    transition: all 0.2s linear;
   }
 
   .brg {

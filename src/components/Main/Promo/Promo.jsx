@@ -2,8 +2,7 @@ import "./Promo.css";
 
 import NavTab from "../NavTab/NavTab";
 
-import React from "react";
-const Promo = () => {
+export const Promo = () => {
   return (
     <section className="promo">
       <div className="promo-container">
@@ -15,5 +14,3 @@ const Promo = () => {
     </section>
   );
 };
-
-export default Promo;
