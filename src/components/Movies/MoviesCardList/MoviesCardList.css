@@ -1,10 +1,10 @@
 .moviecardlist {
-  max-width: 1280px;
+  /* max-width: 1280px; */
 }
 
 .moviecardlist-container {
   margin: 0 auto;
-  padding: 70px 0 10px;
+  padding: 70px 0 0;
   width: calc(100% - 70px * 2);
 }
 
@@ -20,10 +20,10 @@
 } */
 
 .moviecardlist__more {
-  padding: 60px 0 80px;
+  margin: 50px 0 70px;
 }
 
-.moviecardlist__btn {
+.movie__more-btn {
   padding: 10px 0;
   width: 100%;
   font-weight: 500;
@@ -36,7 +36,7 @@
   transition: 0.3s;
 }
 
-.moviecardlist__btn:hover {
+.movie__more-btn:hover {
   background-color: var(--color-hover-gray);
   transition: 0.3s;
 }

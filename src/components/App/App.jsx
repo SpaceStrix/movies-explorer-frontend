@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
@@ -12,24 +12,27 @@ import { Register } from "../Register/Register";
 import { Login } from "../Login/Login";
 
 function App() {
+  // Состояние авторизации
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // Хук useLocation возвращает объект текущего местоположения
+  // Хук useLocation объект текущего местоположения
   const location = useLocation();
 
-  useEffect(() => {
-    console.log("Current location is ", location.pathname);
-  }, [location]);
+  const some = () => {
+    if (location.pathname === "/signup") {
+      setLoggedIn(loggedIn);
+    }
+  };
 
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn} />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
-        <Route path="/signup" element={<Register loggedIn={loggedIn} />} />
-        <Route path="/signin" element={<Login loggedIn={loggedIn} />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/signin" element={<Login />} />
       </Routes>
       <Footer />
     </>

@@ -36,8 +36,8 @@ export const Login = () => {
           Войти
         </button>
         <p className="signin__log-in">
-          Уже зарегистрированы?&nbsp;
-          <NavLink to="/signin" className="signin__log-in-link">
+          Ещё не зарегистрированы?&nbsp;
+          <NavLink to="/signup" className="signin__log-in-link">
             Регистрация
           </NavLink>
         </p>

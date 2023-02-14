@@ -14,7 +14,7 @@ export const MoviesCardList = () => {
           <MoviesCard />
         </ul>
         <div className="moviecardlist__more">
-          <button type="butoon" className="moviecardlist__btn">
+          <button type="button" className="movie__more-btn">
             Еще
           </button>
         </div>

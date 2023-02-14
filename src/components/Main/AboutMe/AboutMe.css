@@ -1,5 +1,6 @@
 .aboutme {
   max-width: 1280px;
+  box-sizing: border-box;
 }
 .aboutme-container {
   margin: 0 auto;
