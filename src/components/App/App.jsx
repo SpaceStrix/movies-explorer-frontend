@@ -9,10 +9,10 @@ import { SavedMovies } from "../SavedMovies/SavedMovies";
 import { Register } from "../Register/Register";
 import { Login } from "../Login/Login";
 import { Profile } from "../Profile/Profile";
+import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 
 function App() {
-  // Состояние авторизации
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true); // Состояние авторизации
 
   return (
     <>
@@ -26,6 +26,7 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
