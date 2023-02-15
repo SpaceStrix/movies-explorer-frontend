@@ -7,13 +7,15 @@ import { Footer } from "../Footer/Footer";
 
 export const Main = ({ loggedIn }) => {
   return (
-    <main className="main">
+    <>
       <Header loggedIn={loggedIn} />
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
+      <main className="main">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 };

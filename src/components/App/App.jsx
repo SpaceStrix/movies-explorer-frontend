@@ -12,7 +12,7 @@ import { Profile } from "../Profile/Profile";
 
 function App() {
   // Состояние авторизации
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <>

@@ -21,7 +21,7 @@ export const Profile = ({ loggedIn }) => {
         <div className="profile-container">
           <form action="" className="profile-form">
             <fieldset className="profile__group">
-              <legend className="profile__title">Привет, Your Name</legend>
+              <legend className="profile__title">Привет, {name}</legend>
               <label htmlFor="profile__name" className="profile__lable">
                 <span className="profile__input-title">Имя</span>
                 <input

@@ -7,17 +7,21 @@ import { Footer } from "../Footer/Footer";
 
 export const SavedMovies = ({ loggedIn }) => {
   return (
-    <section className="savedmovies">
+    <>
       <Header loggedIn={loggedIn} />
-      <SearchForm />
-      <div className="savedmovies-container">
-        <ul className="savedmovies__items movie_list">
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-        </ul>
-      </div>
+      <main className="main">
+        <section className="savedmovies">
+          <SearchForm />
+          <div className="savedmovies-container">
+            <ul className="savedmovies__items movie_list">
+              <MoviesCard />
+              <MoviesCard />
+              <MoviesCard />
+            </ul>
+          </div>
+        </section>
+      </main>
       <Footer />
-    </section>
+    </>
   );
 };

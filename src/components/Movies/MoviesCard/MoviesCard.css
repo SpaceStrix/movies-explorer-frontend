@@ -25,12 +25,12 @@
 .card__title {
   margin: 0;
   font-weight: 500;
-  font-size: 13px;
+  font-size: clamp(0.75rem, 0.727rem + 0.11vw, 0.813rem);
   line-height: 16px;
 }
 .card__duration {
   margin: 0;
-  font-size: 11px;
+  font-size: clamp(0.625rem, 0.602rem + 0.11vw, 0.688rem);
   line-height: 13px;
   color: #a0a0a0;
 }
@@ -47,4 +47,19 @@
 /* активный лайк */
 .card__like:hover {
   background: url(../../../images/like-active.svg) no-repeat center center;
+}
+
+@media screen and (max-width: 768px) {
+  .card__content {
+    padding: 14px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .card__info {
+    gap: 14px;
+  }
+  .card__content {
+    padding: 13px;
+  }
 }

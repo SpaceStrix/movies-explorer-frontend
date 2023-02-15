@@ -25,6 +25,7 @@
   font-size: 14px;
   line-height: 18px;
   color: #a0a0a0;
+  box-sizing: border-box;
 }
 
 .seachform-stroke__btn {
@@ -84,4 +85,29 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
+}
+@media screen and (max-width: 768px) {
+  .seachform-container {
+    width: calc(100% - 30px * 2);
+  }
+  .seachform-stroke {
+    margin-bottom: 40px;
+  }
+
+  .seachform-stroke__input {
+    max-width: 654px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .seachform-container {
+    width: calc(100% - 14px * 2);
+  }
+  .seachform-stroke {
+    margin-bottom: 40px;
+  }
+
+  .seachform-stroke__input {
+    max-width: 238px;
+  }
 }

@@ -16,7 +16,7 @@
 
   max-width: 730px;
   font-weight: 400;
-  font-size: 50px;
+  font-size: clamp(1.813rem, 1.335rem + 2.39vw, 3.125rem);
   line-height: 58px;
   text-align: center;
   letter-spacing: -0.04em;
@@ -44,7 +44,6 @@
   .promo__title {
     margin: 220px 0 217px;
     max-width: 586px;
-    font-size: 29px;
     line-height: 37px;
   }
 }

@@ -120,7 +120,7 @@
   }
   .techs-content-list {
     width: calc(100% - 51px * 2);
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .techs-content-list__item {

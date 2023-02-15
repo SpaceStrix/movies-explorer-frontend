@@ -11,7 +11,6 @@ export const MoviesCardList = () => {
           <MoviesCard />
           <MoviesCard />
           <MoviesCard />
-          <MoviesCard />
         </ul>
         <div className="moviecardlist__more">
           <button type="button" className="movie__more-btn">
