@@ -11,6 +11,8 @@ import { Login } from "../Login/Login";
 import { Profile } from "../Profile/Profile";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 
+import { Preloader } from "../Preloader/Preloader";
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false); // Состояние авторизации
 
@@ -27,6 +29,9 @@ function App() {
         <Route path="/signin" element={<Login />} />
         <Route path="/profile" element={<Profile loggedIn={loggedIn} />} />
         <Route path="*" element={<NotFoundPage />} />
+
+        {/* УДАЛИТЬ Preloader */}
+        <Route path="preloader" element={<Preloader />} />
       </Routes>
     </>
   );

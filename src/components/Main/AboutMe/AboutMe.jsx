@@ -1,6 +1,7 @@
 import "./AboutMe.css";
 import Portfolio from "../Portfolio/Portfolio";
 import mePhoto from "../../../images/photo.png";
+import { Link } from "react-router-dom";
 
 export const AboutMe = () => {
   return (
@@ -20,14 +21,14 @@ export const AboutMe = () => {
               Контур». После того, как прошёл курс по веб-разработке, начал
               заниматься фриланс-заказами и ушёл с постоянной работы.
             </p>
-            <a
-              href="https://github.com/SpaceStrix"
-              className="aboutme-info-bio__git link_effect"
+            <Link
+              to="https://github.com/SpaceStrix"
+              className="aboutme-info-bio__git hover_effect"
               target={"_blank"}
               rel="noreferrer"
             >
               Github
-            </a>
+            </Link>
           </div>
           <img
             src={mePhoto}

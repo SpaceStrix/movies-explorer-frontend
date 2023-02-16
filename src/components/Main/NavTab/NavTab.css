@@ -10,18 +10,12 @@
 .promo-list__link {
   padding: 10px 23px;
   background: #e8e8e8;
-  transition: all 0.3s linear;
   border-radius: 10px;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
   color: #000000;
   text-decoration: none;
-}
-
-.link_effectbrg:hover {
-  transition: all 0.3s linear;
-  background: #cacaca;
 }
 
 /*  @media */

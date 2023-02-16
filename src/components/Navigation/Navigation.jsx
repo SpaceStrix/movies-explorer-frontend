@@ -28,7 +28,7 @@ export const Navigation = ({ loggedIn }) => {
 
       {loggedIn && (
         <div className={stateBurger}>
-          <div className="brg"></div>
+          <div className="header__brg"></div>
           <nav className="header__nav">
             <ul className="header__list">
               <li className="header__list-item">
@@ -48,7 +48,7 @@ export const Navigation = ({ loggedIn }) => {
               </li>
             </ul>
           </nav>
-          <Link to={"/profile"} className="header__auth-account">
+          <Link to={"/profile"} className="header__auth-account hover_effect">
             <img src={acc} alt="" /> Аккаунт
           </Link>
         </div>
@@ -57,14 +57,17 @@ export const Navigation = ({ loggedIn }) => {
       {!loggedIn && (
         <ul className="header__auth-list">
           <li className="header__auth-list-item">
-            <Link to={"/signup"} className="header__auth-list-link">
+            <Link
+              to={"/signup"}
+              className="header__auth-list-link hover_effect"
+            >
               Регистрация
             </Link>
           </li>
           <li className="header__auth-list-item">
             <Link
               to={"/signin"}
-              className="header__auth-list-link link_highlight"
+              className="header__auth-list-link link_highlight hover_effect"
             >
               Войти
             </Link>

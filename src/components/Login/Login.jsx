@@ -39,7 +39,7 @@ export const Login = () => {
                 required: "Поле email обязательное",
                 pattern: {
                   value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                  message: "Не валидный email",
+                  message: "Невалидный email",
                 },
               })}
             />
@@ -58,7 +58,7 @@ export const Login = () => {
                 required: "Поле password обязательное",
                 minLength: {
                   value: 4,
-                  message: `Минимальная длина пароля 4 знака`,
+                  message: `Минимальная длина пароля 4 символа`,
                 },
               })}
             />
@@ -68,7 +68,7 @@ export const Login = () => {
           </label>
         </fieldset>
         <button
-          className="signin__btn-auth btn_auth"
+          className="signin__btn-auth btn_auth hover_effect"
           type="submit"
           disabled={!isValid}
         >
@@ -76,7 +76,7 @@ export const Login = () => {
         </button>
         <p className="signin__log-in">
           Ещё не зарегистрированы?&nbsp;
-          <NavLink to="/signup" className="signin__log-in-link">
+          <NavLink to="/signup" className="signin__log-in-link hover_effect">
             Регистрация
           </NavLink>
         </p>

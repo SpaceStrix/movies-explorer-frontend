@@ -8,7 +8,7 @@ const Portfolio = () => {
         <li className="portfolio__item">
           <a
             href="https://spacestrix.github.io/how-to-learn/"
-            className="portfolio__link link_effect"
+            className="portfolio__link hover_effect"
             target={"_blank"}
             rel="noreferrer"
           >
@@ -19,7 +19,7 @@ const Portfolio = () => {
         <li className="portfolio__item">
           <a
             href="https://spacestrix.github.io/russian-travel/"
-            className="portfolio__link link_effect"
+            className="portfolio__link hover_effect"
             target={"_blank"}
             rel="noreferrer"
           >
@@ -30,7 +30,7 @@ const Portfolio = () => {
         <li className="portfolio__item">
           <a
             href="https://spacestrix.github.io/mesto-react/"
-            className="portfolio__link link_effect"
+            className="portfolio__link hover_effect"
             target={"_blank"}
             rel="noreferrer"
           >

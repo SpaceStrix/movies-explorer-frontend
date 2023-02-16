@@ -109,6 +109,17 @@
   border: 2px solid #aaaaaa;
   border-radius: 50px;
 }
+/* *ОБЩИЙ КЛАСС ДЛЯ HOVER */
+.hover_effect,
+.header__list-link {
+  transition: all 0.2s linear;
+}
+
+.hover_effect:hover,
+.header__list-link:hover {
+  opacity: 0.7;
+  transition: all 0.2s linear;
+}
 
 /* сделать еще брэкпоинтов */
 @media (min-width: 320px) and (max-width: 768px) {
@@ -156,7 +167,7 @@
     transition: all 0.2s linear;
   }
 
-  .brg {
+  .header__brg {
     width: 35%;
     height: 100%;
     position: fixed;
@@ -221,7 +232,7 @@
   .header-logged {
     width: 100%;
   }
-  .brg {
+  .header__brg {
     display: none;
   }
 
