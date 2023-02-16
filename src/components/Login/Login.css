@@ -30,8 +30,10 @@
 }
 
 .signin__input-lable {
-  margin-bottom: 10px;
-  display: block;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
   font-size: 10px;
   line-height: 12px;
   color: #a0a0a0;
@@ -39,7 +41,7 @@
 
 .signin__input {
   padding: 15px;
-  margin-bottom: 20px;
+  margin: 10px 0 20px;
   width: 100%;
   box-sizing: border-box;
   outline-color: #cacaca4f;
@@ -75,6 +77,19 @@
 .signin__log-in-link {
   text-decoration: none;
   color: var(--color-green);
+}
+
+.input-error-message {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  position: absolute;
+  bottom: 0;
+}
+
+.btn_auth:disabled {
+  opacity: 0.3;
 }
 
 @media screen and (max-width: 768px) {

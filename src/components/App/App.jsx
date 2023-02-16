@@ -12,7 +12,7 @@ import { Profile } from "../Profile/Profile";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true); // Состояние авторизации
+  const [loggedIn, setLoggedIn] = useState(false); // Состояние авторизации
 
   return (
     <>

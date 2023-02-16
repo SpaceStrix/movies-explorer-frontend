@@ -1,38 +1,77 @@
 import "./Login.css";
-import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 
+import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 export const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset,
+  } = useForm({ mode: "onChange" });
+  const onSubmit = data => {
+    JSON.stringify(data);
+    reset();
+  };
   return (
     <section className="signin">
       <NavLink to="/" className="signin__logo">
         <img src={logo} alt="Логотип" />
       </NavLink>
-      <form action="" className="signin-form">
+      <form
+        action=""
+        className="signin-form"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <fieldset className="signin__group">
           <legend className="signin__title">Рады видеть!</legend>{" "}
           <label htmlFor="email" className="signin__input-lable">
             E-mail
+            <input
+              name="email"
+              type="text"
+              placeholder="Email"
+              className="signin__input"
+              {...register("email", {
+                required: "Поле email обязательное",
+                pattern: {
+                  value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                  message: "Не валидный email",
+                },
+              })}
+            />
+            <span className="input-error-message">
+              {errors?.email?.message}
+            </span>
           </label>
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            className="signin__input"
-            required
-          />
           <label htmlFor="password" className="signin__input-lable">
             Пароль
+            <input
+              name="password"
+              type="password"
+              placeholder="Пароль"
+              className="signin__input"
+              {...register("password", {
+                required: "Поле password обязательное",
+                minLength: {
+                  value: 4,
+                  message: `Минимальная длина пароля 4 знака`,
+                },
+              })}
+            />
+            <span className="input-error-message">
+              {errors?.password?.message}
+            </span>
           </label>
-          <input
-            name="password"
-            type="password"
-            placeholder="Пароль"
-            className="signin__input"
-            required
-          />
         </fieldset>
-        <button className="signin__btn-auth" type="submit">
+        <button
+          className="signin__btn-auth btn_auth"
+          type="submit"
+          disabled={!isValid}
+        >
           Войти
         </button>
         <p className="signin__log-in">
