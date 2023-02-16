@@ -11,7 +11,10 @@ export const SearchForm = () => {
               className="seachform-stroke__input"
               placeholder="Фильм"
             />
-            <button className="seachform-stroke__btn" type="submit"></button>
+            <button
+              className="seachform-stroke__btn hover_effect"
+              type="submit"
+            ></button>
           </fieldset>
           <fieldset className="seachform-check">
             <input type="checkbox" className="seachform-check__checkbox" />

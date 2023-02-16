@@ -31,6 +31,7 @@
 @media screen and (max-width: 479px) {
   .savedmovies-container {
     padding: 40px 0 0;
+    margin-bottom: 180px;
     width: calc(100% - 10px * 2);
   }
 }

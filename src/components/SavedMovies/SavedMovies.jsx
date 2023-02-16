@@ -16,7 +16,9 @@ export const SavedMovies = ({ loggedIn }) => {
             <ul className="savedmovies__items movie_list">
               <MoviesCard />
               <MoviesCard />
+              {/* <MoviesCard />
               <MoviesCard />
+              <MoviesCard /> */}
             </ul>
           </div>
         </section>
