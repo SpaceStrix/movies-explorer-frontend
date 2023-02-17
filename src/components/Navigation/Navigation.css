@@ -27,7 +27,7 @@
 }
 
 .header__list-link,
-.header_link-active {
+.header__link-active {
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
@@ -35,7 +35,7 @@
   text-decoration: none;
 }
 
-.header_link-active {
+.header__link-active {
   font-weight: 500;
 }
 
@@ -194,7 +194,7 @@
   }
 
   .header__list-link,
-  .header_link-active {
+  .header__link-active {
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
@@ -202,7 +202,7 @@
     text-decoration: none;
   }
 
-  .header_link-active {
+  .header__link-active {
     padding-bottom: 4px;
     border-bottom: 2px solid var(--color-black);
   }
@@ -238,5 +238,16 @@
 
   .header__auth-account {
     margin: 0 auto 46px;
+  }
+
+  .header__auth-list {
+    gap: 14px;
+  }
+  .link_highlight {
+    padding: 5px 12px;
+  }
+
+  .header__auth-list-link {
+    font-size: 10px;
   }
 }

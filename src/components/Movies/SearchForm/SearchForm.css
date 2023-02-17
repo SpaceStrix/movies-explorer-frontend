@@ -108,6 +108,6 @@
   }
 
   .seachform-stroke__input {
-    max-width: 238px;
+    max-width: 100%;
   }
 }

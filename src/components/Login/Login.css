@@ -88,7 +88,8 @@
   bottom: 0;
 }
 
-.btn_auth:disabled {
+.signup__btn-auth-disabled:disabled,
+.signin__btn-auth-disabled:disabled {
   opacity: 0.3;
 }
 

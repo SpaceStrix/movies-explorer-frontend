@@ -5,7 +5,7 @@ export const MoviesCardList = () => {
   return (
     <section className="moviecardlist">
       <div className="moviecardlist-container">
-        <ul className="moviecardlist__items movie_list">
+        <ul className="moviecardlist__items">
           <MoviesCard />
           <MoviesCard />
           <MoviesCard />
@@ -20,7 +20,10 @@ export const MoviesCardList = () => {
           <MoviesCard /> */}
         </ul>
         <div className="moviecardlist__more">
-          <button type="button" className="movie__more-btn">
+          <button
+            type="button"
+            className="moviecardlist__more-btn btn btn_effect"
+          >
             Еще
           </button>
         </div>

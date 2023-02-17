@@ -6,7 +6,7 @@ import acc from "../../images/acc-icon.svg";
 
 // Автивный роут
 const setActiveLink = ({ isActive }) =>
-  isActive ? "header_link-active" : "header__list-link";
+  isActive ? "header__link-active" : "header__list-link";
 
 export const Navigation = ({ loggedIn }) => {
   const [burgerOpen, setBurgerOpen] = useState(false);
@@ -48,7 +48,10 @@ export const Navigation = ({ loggedIn }) => {
               </li>
             </ul>
           </nav>
-          <Link to={"/profile"} className="header__auth-account hover_effect">
+          <Link
+            to={"/profile"}
+            className="header__auth-account link link_effect"
+          >
             <img src={acc} alt="" /> Аккаунт
           </Link>
         </div>
@@ -59,7 +62,7 @@ export const Navigation = ({ loggedIn }) => {
           <li className="header__auth-list-item">
             <Link
               to={"/signup"}
-              className="header__auth-list-link hover_effect"
+              className="header__auth-list-link link link_effect"
             >
               Регистрация
             </Link>
@@ -67,7 +70,7 @@ export const Navigation = ({ loggedIn }) => {
           <li className="header__auth-list-item">
             <Link
               to={"/signin"}
-              className="header__auth-list-link link_highlight hover_effect"
+              className="header__auth-list-link link_highlight link link_effect"
             >
               Войти
             </Link>

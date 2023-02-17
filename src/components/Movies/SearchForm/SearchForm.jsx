@@ -10,9 +10,10 @@ export const SearchForm = () => {
               type="text"
               className="seachform-stroke__input"
               placeholder="Фильм"
+              required
             />
             <button
-              className="seachform-stroke__btn hover_effect"
+              className="seachform-stroke__btn btn btn_effect"
               type="submit"
             ></button>
           </fieldset>

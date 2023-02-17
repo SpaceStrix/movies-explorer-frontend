@@ -23,7 +23,7 @@ export const AboutMe = () => {
             </p>
             <Link
               to="https://github.com/SpaceStrix"
-              className="aboutme-info-bio__git hover_effect"
+              className="aboutme-info-bio__git link link_effect"
               target={"_blank"}
               rel="noreferrer"
             >

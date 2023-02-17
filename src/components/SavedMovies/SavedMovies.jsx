@@ -13,7 +13,7 @@ export const SavedMovies = ({ loggedIn }) => {
         <section className="savedmovies">
           <SearchForm />
           <div className="savedmovies-container">
-            <ul className="savedmovies__items movie_list">
+            <ul className="savedmovies__items">
               <MoviesCard />
               <MoviesCard />
               {/* <MoviesCard />

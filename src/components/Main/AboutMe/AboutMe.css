@@ -24,8 +24,8 @@
 .aboutme-info {
   margin: 66px 0 100px;
   display: flex;
+  column-gap: 49px;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 
 .aboutme-info-bio {
@@ -73,7 +73,7 @@
   }
 
   .aboutme-info-bio {
-    max-width: 365px;
+    max-width: 490px;
   }
   .aboutme-info-bio__name {
     margin: 0 0 16px;
@@ -104,7 +104,7 @@
 }
 @media (min-width: 480px) and (max-width: 767px) {
 }
-@media (min-width: 320px) and (max-width: 479px) {
+@media (min-width: 320px) and (max-width: 767px) {
   .aboutme-container {
     padding: 70px 0;
     width: calc(100% - 14px * 2);

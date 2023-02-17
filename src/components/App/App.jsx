@@ -14,7 +14,7 @@ import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Preloader } from "../Preloader/Preloader";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false); // Состояние авторизации
+  const [loggedIn, setLoggedIn] = useState(true); // Состояние авторизации
 
   return (
     <>

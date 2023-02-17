@@ -19,3 +19,22 @@ body {
   -moz-text-size-adjust: 100%;
   box-sizing: border-box;
 }
+
+.link {
+  text-decoration: none;
+  transition: all 0.2s linear;
+}
+
+.link_effect:hover {
+  opacity: 0.7;
+  transition: all 0.2s linear;
+}
+
+.btn {
+  transition: all 0.2s linear;
+}
+
+.btn_effect:hover {
+  opacity: 0.7;
+  transition: all 0.2s linear;
+}

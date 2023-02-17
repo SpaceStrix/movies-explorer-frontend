@@ -15,7 +15,7 @@ export const Footer = () => {
               <Link
                 to="https://practicum.yandex.ru/"
                 target={"_blank"}
-                className="footer-list__link hover_effect"
+                className="footer-list__link link link_effect"
                 rel="noreferrer"
               >
                 Яндекс.Практикум
@@ -25,7 +25,7 @@ export const Footer = () => {
               <Link
                 to="https://github.com/"
                 target={"_blank"}
-                className="footer-list__link hover_effect"
+                className="footer-list__link link link_effect"
                 rel="noreferrer"
               >
                 Github

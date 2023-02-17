@@ -4,11 +4,22 @@
   width: calc(100% - 70px * 2);
 }
 
+.moviecardlist__items {
+  margin: 0;
+  padding: 0;
+  column-gap: 24px;
+  row-gap: clamp(0.875rem, 0.352rem + 2.61vw, 2.313rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(281px, 1fr));
+  justify-items: center;
+  list-style: none;
+}
+
 .moviecardlist__more {
   margin: 60px 0 80px;
 }
 
-.movie__more-btn {
+.moviecardlist__more-btn {
   padding: 10px 0;
   width: 100%;
   font-weight: 500;
@@ -18,12 +29,6 @@
   border: none;
   border-radius: 6px;
   background-color: var(--color-gray);
-  transition: 0.3s;
-}
-
-.movie__more-btn:hover {
-  background-color: var(--color-hover-gray);
-  transition: 0.3s;
 }
 
 @media screen and (max-width: 768px) {

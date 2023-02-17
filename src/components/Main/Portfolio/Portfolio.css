@@ -47,7 +47,7 @@
   }
 }
 
-@media (min-width: 320px) and (max-width: 479px) {
+@media (min-width: 320px) and (max-width: 767px) {
   .portfolio__item {
     padding-bottom: 12px;
   }

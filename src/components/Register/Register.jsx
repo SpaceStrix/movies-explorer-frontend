@@ -83,7 +83,7 @@ export const Register = () => {
             </label>
           </fieldset>
           <button
-            className="signup__btn-auth btn_auth hover_effect"
+            className="signup__btn-auth signup__btn-auth-disabled btn btn_effect"
             type="submit"
             disabled={!isValid}
           >
@@ -92,7 +92,10 @@ export const Register = () => {
         </form>
         <p className="signup__log-in">
           Уже зарегистрированы?&nbsp;
-          <NavLink to="/signin" className="signup__log-in-link hover_effect">
+          <NavLink
+            to="/signin"
+            className="signup__log-in-link link link_effect"
+          >
             Войти
           </NavLink>
         </p>
