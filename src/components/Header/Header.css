@@ -1,0 +1,28 @@
+.header {
+  max-width: 1280px;
+}
+.header-container {
+  margin: 0 auto;
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 74px;
+  width: calc(100% - 70px * 2);
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+}
+
+@media screen and (max-width: 768px) {
+  .header-container {
+    width: calc(100% - 30px * 2);
+  }
+}
+@media screen and (max-width: 479px) {
+  .header-container {
+    width: calc(100% - 14px * 2);
+  }
+}

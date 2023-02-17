@@ -1,0 +1,40 @@
+:root {
+  --color-black: #000;
+  --color-green: #2be080;
+  --color-pink: #ee3465;
+  --color-gray: #f9f9f9;
+  --color-hover-gray: #e0e0e0;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1280px;
+  font-family: Inter, Helvetica, sans-serif;
+  color: var(--color-black);
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  box-sizing: border-box;
+}
+
+.link {
+  text-decoration: none;
+  transition: all 0.2s linear;
+}
+
+.link_effect:hover {
+  opacity: 0.7;
+  transition: all 0.2s linear;
+}
+
+.btn {
+  transition: all 0.2s linear;
+}
+
+.btn_effect:hover {
+  opacity: 0.7;
+  transition: all 0.2s linear;
+}

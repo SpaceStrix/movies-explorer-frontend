@@ -1,0 +1,131 @@
+.techs {
+  max-width: 1280px;
+  background: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.techs-container {
+  margin: 0 auto;
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 70px * 2);
+}
+
+.techs-content {
+  margin: 90px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.techs__title {
+  margin: 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #000;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.techs-content__title {
+  margin: 0 0 26px;
+  max-width: 600px;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+.techs-content__descr {
+  margin: 0 0 100px;
+  max-width: 460px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+.techs-content-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.techs-content-list__item {
+  padding: 21px 0;
+  width: 90px;
+  background: #e8e8e8;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .techs-container {
+    padding: 90px 0;
+    width: calc(100% - 50px * 2);
+  }
+  .techs-content {
+    margin: 80px 0 0;
+  }
+  .techs-content__title {
+    margin: 0 0 22px;
+  }
+
+  .techs-content__descr {
+    margin: 0 0 83px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .techs-content-list__item {
+    width: 84px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+@media (min-width: 480px) and (max-width: 767px) {
+}
+@media (min-width: 320px) and (max-width: 479px) {
+  .techs-container {
+    padding: 70px 0;
+    width: calc(100% - 18px * 2);
+  }
+
+  .techs__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .techs-content {
+    margin: 60px 0 0;
+  }
+  .techs-content__title {
+    margin: 0 0 24px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .techs-content__descr {
+    margin: 0 0 50px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .techs-content-list {
+    width: calc(100% - 51px * 2);
+    justify-content: flex-start;
+  }
+
+  .techs-content-list__item {
+    width: 84px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

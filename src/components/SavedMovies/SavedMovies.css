@@ -1,0 +1,37 @@
+.savedmovies {
+  max-width: 1280px;
+}
+.savedmovies-container {
+  margin: 0 auto;
+  padding: 70px 0 107px;
+  width: calc(100% - 70px * 2);
+}
+
+.savedmovies__items {
+  margin: 0;
+  padding: 0;
+  column-gap: 24px;
+  row-gap: clamp(0.875rem, 0.352rem + 2.61vw, 2.313rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(281px, 1fr));
+  justify-items: center;
+  list-style: none;
+}
+
+@media screen and (max-width: 768px) {
+  .savedmovies-container {
+    width: calc(100% - 30px * 2);
+  }
+
+  .savedmovies__more {
+    margin: 85px 0 92px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .savedmovies-container {
+    padding: 40px 0 0;
+    margin-bottom: 180px;
+    width: calc(100% - 10px * 2);
+  }
+}

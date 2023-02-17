@@ -1,0 +1,253 @@
+.testburger,
+.header-logged {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header__nav {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.header__list,
+.header__auth-list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  list-style: none;
+}
+
+.header__list-item:first-child {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.header__list-link,
+.header__link-active {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.header__link-active {
+  font-weight: 500;
+}
+
+.header__auth-list {
+  justify-content: flex-end;
+
+  gap: 30px;
+}
+
+.header__auth-list-link {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.link_highlight {
+  padding: 8px 20px;
+  background: #2be080;
+  border-radius: 3px;
+}
+
+.header__burger {
+  padding: 0;
+
+  position: absolute;
+  top: 16px;
+  right: 30px;
+  z-index: 2;
+
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  background: url("../../images/burger.svg") no-repeat center center;
+
+  visibility: hidden;
+  opacity: 0;
+}
+
+.header__burger-close {
+  padding: 0;
+
+  position: fixed;
+  top: 16px;
+  right: 30px;
+  z-index: 3;
+
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  background: url("../../images/close-icon.svg") no-repeat center center;
+
+  visibility: hidden;
+  opacity: 0;
+}
+
+.header__auth-account {
+  padding: 8px 12px;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--color-black);
+
+  border: 2px solid #aaaaaa;
+  border-radius: 50px;
+}
+/* *ОБЩИЙ КЛАСС ДЛЯ HOVER */
+.hover_effect,
+.header__list-link {
+  transition: all 0.2s linear;
+}
+
+.hover_effect:hover,
+.header__list-link:hover {
+  opacity: 0.7;
+  transition: all 0.2s linear;
+}
+
+/* сделать еще брэкпоинтов */
+@media (min-width: 320px) and (max-width: 768px) {
+  .header__burger {
+    opacity: 1;
+    visibility: visible;
+  }
+  .header__burger-close {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .header-logged {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    background-color: #ffffff;
+    width: 65%;
+    height: 100%;
+
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.2s linear;
+  }
+  .testburger {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    background-color: #ffffff;
+    width: 65%;
+    height: 100%;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s linear;
+  }
+
+  .header__brg {
+    width: 35%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000000;
+    opacity: 0.3;
+  }
+  .header__nav {
+    margin: 0;
+    justify-content: center;
+    text-align: center;
+  }
+  .header__list {
+    margin: 160px 0 0;
+    flex-direction: column;
+    gap: 28px;
+    color: #000;
+  }
+
+  .header__list-item:first-child {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .header__list-link,
+  .header__link-active {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: var(--color-black);
+    text-decoration: none;
+  }
+
+  .header__link-active {
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--color-black);
+  }
+
+  .header__auth-account {
+    margin: 0 auto 90px;
+    width: 100px;
+  }
+}
+@media screen and (max-width: 479px) {
+  .header__list {
+    margin: 144px 0 0;
+  }
+  .header__burger {
+    top: 15px;
+    right: 14px;
+    width: 40px;
+    height: 43px;
+  }
+
+  .header__burger-close {
+    top: 15px;
+    right: 14px;
+    width: 40px;
+    height: 43px;
+  }
+  .header-logged {
+    width: 100%;
+  }
+  .header__brg {
+    display: none;
+  }
+
+  .header__auth-account {
+    margin: 0 auto 46px;
+  }
+
+  .header__auth-list {
+    gap: 14px;
+  }
+  .link_highlight {
+    padding: 5px 12px;
+  }
+
+  .header__auth-list-link {
+    font-size: 10px;
+  }
+}
