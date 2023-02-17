@@ -28,6 +28,15 @@
   box-sizing: border-box;
 }
 
+.search-error-message {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  position: absolute;
+  bottom: -20px;
+}
+
 .seachform-stroke__btn {
   padding: 7px;
   background: url(../../../images/search.svg) no-repeat center center;
@@ -86,6 +95,13 @@
   font-size: 12px;
   line-height: 18px;
 }
+
+.seachform-stroke__label {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   .seachform-container {
     width: calc(100% - 30px * 2);

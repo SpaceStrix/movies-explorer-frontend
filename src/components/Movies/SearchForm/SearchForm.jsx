@@ -1,17 +1,39 @@
 import "./SearchForm.css";
+import { useForm } from "react-hook-form";
 
 export const SearchForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset,
+  } = useForm({ mode: "onChange" });
+  const onSubmit = data => {
+    JSON.stringify(data);
+    reset();
+  };
+
   return (
     <section className="seachform">
       <div className="seachform-container">
-        <form action="" className="seachform-form" noValidate>
+        <form
+          action=""
+          className="seachform-form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <fieldset className="seachform-stroke">
-            <input
-              type="text"
-              className="seachform-stroke__input"
-              placeholder="Фильм"
-              required
-            />
+            <label htmlFor="search" className="seachform-stroke__label">
+              <input
+                type="text"
+                name="search"
+                className="seachform-stroke__input"
+                placeholder="Фильм"
+                {...register("search", { required: "Введите ключевое слово" })}
+              />
+              <span className="search-error-message">
+                {errors?.search?.message}
+              </span>
+            </label>
             <button
               className="seachform-stroke__btn btn btn_effect"
               type="submit"
