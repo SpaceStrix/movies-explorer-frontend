@@ -2,7 +2,7 @@ import "./Techs.css";
 
 export const Techs = () => {
   return (
-    <section className="techs" id="techs">
+    <section className="techs" id={"techs"}>
       <div className="techs-container">
         <h2 className="techs__title">Технологии</h2>
         <div className="techs-content">

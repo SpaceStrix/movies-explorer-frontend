@@ -1,5 +1,6 @@
 import "./SearchForm.css";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 export const SearchForm = () => {
   const {
@@ -9,10 +10,13 @@ export const SearchForm = () => {
     reset,
   } = useForm({ mode: "onChange" });
   const onSubmit = data => {
-    JSON.stringify(data);
+    setInputValue(data);
     reset();
   };
 
+  //
+  const [inputValue, setInputValue] = useState();
+  console.log(inputValue);
   return (
     <section className="seachform">
       <div className="seachform-container">
@@ -28,7 +32,9 @@ export const SearchForm = () => {
                 name="search"
                 className="seachform-stroke__input"
                 placeholder="Фильм"
-                {...register("search", { required: "Введите ключевое слово" })}
+                {...register("search", {
+                  required: "Нужно ввести ключевое слово",
+                })}
               />
               <span className="search-error-message">
                 {errors?.search?.message}

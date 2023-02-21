@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-export const Login = () => {
+export const Login = ({ onLogin }) => {
   const {
     register,
     handleSubmit,
@@ -12,7 +12,7 @@ export const Login = () => {
     reset,
   } = useForm({ mode: "onChange" });
   const onSubmit = data => {
-    JSON.stringify(data);
+    onLogin(data);
     reset();
   };
   return (
