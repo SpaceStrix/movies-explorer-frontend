@@ -16,7 +16,6 @@ export const SearchForm = () => {
 
   //
   const [inputValue, setInputValue] = useState();
-  console.log(inputValue);
   return (
     <section className="seachform">
       <div className="seachform-container">
@@ -24,10 +23,12 @@ export const SearchForm = () => {
           action=""
           className="seachform-form"
           onSubmit={handleSubmit(onSubmit)}
+          noValidate
         >
           <fieldset className="seachform-stroke">
             <label htmlFor="search" className="seachform-stroke__label">
               <input
+                autoComplete="off"
                 type="text"
                 name="search"
                 className="seachform-stroke__input"

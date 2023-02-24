@@ -14,23 +14,59 @@ import { Profile } from "../Profile/Profile";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Preloader } from "../Preloader/Preloader";
 
+import { Header } from "../Header/Header";
+import { Footer } from "../Footer/Footer";
+
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as auth from "../../utils/Auth";
+import { mainApi } from "../../utils/MainApi";
 
 export const App = () => {
   // Состояния
   const [loggedIn, setLoggedIn] = useState(false); // Состояние авторизации
   const [loading, setLoading] = useState(true); // Состояние загрузки
   const [userData, setUserData] = useState(null); // Данные пользователя
-
+  const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
   const navigate = useNavigate(); //
+
+  const handleUpdateUser = newData => {
+    console.log(newData);
+    mainApi
+      .setNewUserInfo(newData)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi
+        .getInitialData()
+        .then(([getDataUserInfo]) => {
+          setCurrentUser(getDataUserInfo);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }, [loggedIn]);
 
   const onAuth = useCallback(data => {
     localStorage.setItem("jwt", data.token);
     setLoggedIn(true);
-    setUserData(data.user);
+    // setUserData(data.user);
     navigate("/");
   }, []);
+
+  const logOut = () => {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    setUserData("");
+    navigate("signin");
+  };
 
   const tokenCheck = useCallback(async () => {
     try {
@@ -60,9 +96,7 @@ export const App = () => {
       try {
         setLoading(true);
         const data = await auth.register({ name, email, password });
-        setTimeout(() => {
-          onLogin({ password, email });
-        }, 300);
+        onLogin({ name, email, password });
         onAuth(data);
         return data;
       } catch {
@@ -83,7 +117,7 @@ export const App = () => {
       if (data.token) {
         onAuth(data);
       }
-      setUserData(email);
+      // setUserData(email);
       return data;
     } catch {
     } finally {
@@ -94,10 +128,10 @@ export const App = () => {
   useEffect(() => {
     tokenCheck();
   }, [tokenCheck]);
-
   return (
-    <CurrentUserContext.Provider value={""}>
+    <CurrentUserContext.Provider value={currentUser}>
       <>
+        <Header loggedIn={loggedIn} />
         {loading ? (
           <Preloader />
         ) : (
@@ -123,18 +157,27 @@ export const App = () => {
               path="/profile"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
-                  <Profile />
+                  <Profile
+                    logOut={logOut}
+                    onUpdateUserInfo={handleUpdateUser}
+                  />
                 </ProtectedRoute>
               }
             />
             <Route
               path="/signup"
-              element={<Register onRegistration={onRegistration} />}
+              element={
+                <Register onRegistration={onRegistration} loggedIn={loggedIn} />
+              }
             />
-            <Route path="/signin" element={<Login onLogin={onLogin} />} />
+            <Route
+              path="/signin"
+              element={<Login onLogin={onLogin} loggedIn={loggedIn} />}
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         )}
+        <Footer />
       </>
     </CurrentUserContext.Provider>
   );

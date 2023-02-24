@@ -1,10 +1,10 @@
 import "./Login.css";
 import logo from "../../images/logo.svg";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-export const Login = ({ onLogin }) => {
+export const Login = ({ onLogin, loggedIn }) => {
   const {
     register,
     handleSubmit,
@@ -15,6 +15,9 @@ export const Login = ({ onLogin }) => {
     onLogin(data);
     reset();
   };
+
+  if (loggedIn) return <Navigate to={"/"} />;
+
   return (
     <div className="main">
       <section className="signin">
