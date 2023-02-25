@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { useCallback, useState, useEffect } from "react";
 
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
@@ -25,49 +25,42 @@ export const App = () => {
   // Состояния
   const [loggedIn, setLoggedIn] = useState(false); // Состояние авторизации
   const [loading, setLoading] = useState(true); // Состояние загрузки
-  const [userData, setUserData] = useState(null); // Данные пользователя
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
-  const navigate = useNavigate(); //
 
-  const handleUpdateUser = newData => {
-    console.log(newData);
-    mainApi
-      .setNewUserInfo(newData)
-      .then(data => {
-        setCurrentUser(data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+  // useNavigate
+  const navigate = useNavigate();
+
+  // useLocation
+  const { pathname } = useLocation(); // Забираем из объекта локации pathname
+  const locationPath = pathname => {
+    return (
+      pathname === "/" ||
+      pathname === "/movies" ||
+      pathname === "/saved-movies" ||
+      pathname === "/profile"
+    );
   };
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
 
-  useEffect(() => {
-    if (loggedIn) {
-      mainApi
-        .getInitialData()
-        .then(([getDataUserInfo]) => {
-          setCurrentUser(getDataUserInfo);
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    }
-  }, [loggedIn]);
-
-  const onAuth = useCallback(data => {
-    localStorage.setItem("jwt", data.token);
-    setLoggedIn(true);
-    // setUserData(data.user);
-    navigate("/");
-  }, []);
-
-  const logOut = () => {
-    localStorage.removeItem("jwt");
-    setLoggedIn(false);
-    setUserData("");
-    navigate("signin");
-  };
-
+  // Проверка токена
   const tokenCheck = useCallback(async () => {
     try {
       setLoading(true);
@@ -80,45 +73,10 @@ export const App = () => {
       if (!user) {
         throw new Error("invalid user");
       }
-
       if (user) {
         setLoggedIn(true);
-        setUserData(user);
+        setCurrentUser(user);
       }
-    } catch {
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const onRegistration = useCallback(
-    async ({ name, email, password }) => {
-      try {
-        setLoading(true);
-        const data = await auth.register({ name, email, password });
-        onLogin({ name, email, password });
-        onAuth(data);
-        return data;
-      } catch {
-      } finally {
-        setLoading(false);
-      }
-    },
-    [onAuth]
-  );
-
-  const onLogin = useCallback(async ({ email, password }) => {
-    try {
-      setLoading(true);
-      const data = await auth.login({ email, password });
-      if (!data) {
-        throw new Error("Неверный пароль или почта");
-      }
-      if (data.token) {
-        onAuth(data);
-      }
-      // setUserData(email);
-      return data;
     } catch {
     } finally {
       setLoading(false);
@@ -126,12 +84,85 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
+    if (loggedIn) {
+      mainApi
+        .getUserInfoFromServer()
+        .then(userData => {
+          setLoggedIn(true);
+          setCurrentUser(userData);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
     tokenCheck();
-  }, [tokenCheck]);
+  }, []);
+
+  // Обвновление профиля
+  const handleUpdateUser = newData => {
+    mainApi
+      .setNewUserInfo(newData)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  const onAuth = useCallback(data => {
+    localStorage.setItem("jwt", data.token);
+    setLoggedIn(true);
+    navigate("/");
+  }, []);
+
+  // Регистрация
+  const onRegistration = ({ name, email, password }) => {
+    auth
+      .register({ name, email, password })
+      .then(data => {
+        setLoading(true);
+        navigate("/signin");
+        return data;
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  };
+
+  // Авторизация
+  const onLogin = ({ password, email }) => {
+    auth
+      .login({ password, email })
+      .then(data => {
+        setLoading(true);
+        if (!data) {
+          throw new Error("Неверный пароль или почта");
+        }
+        if (data.token) {
+          onAuth(data);
+        }
+        navigate("/movies");
+        return data;
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  };
+
+  // Выход
+  const logOut = () => {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    setCurrentUser({});
+    navigate("signin");
+  };
+
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <>
-        <Header loggedIn={loggedIn} />
+    <>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header loggedIn={loggedIn} locationPath={locationPath(pathname)} />
         {loading ? (
           <Preloader />
         ) : (
@@ -177,8 +208,8 @@ export const App = () => {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         )}
-        <Footer />
-      </>
-    </CurrentUserContext.Provider>
+        <Footer locationPath={locationPath(pathname)} />
+      </CurrentUserContext.Provider>
+    </>
   );
 };

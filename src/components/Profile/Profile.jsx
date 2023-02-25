@@ -1,21 +1,15 @@
 import "./Profile.css";
 
-// import { Header } from "../Header/Header";
 import { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export const Profile = ({ logOut, onUpdateUserInfo }) => {
+  const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleChangeName = e => {
-    setName(e.target.value);
-  };
-  const handleChangeEmail = e => {
-    setEmail(e.target.value);
-  };
-
-  const currentUser = useContext(CurrentUserContext);
+  const handleChangeName = e => setName(e.target.value);
+  const handleChangeEmail = e => setEmail(e.target.value);
 
   useEffect(() => {
     setName(currentUser.name);
@@ -25,6 +19,7 @@ export const Profile = ({ logOut, onUpdateUserInfo }) => {
   // Обновляем данные пользователя
   const handleSubmit = e => {
     e.preventDefault();
+
     onUpdateUserInfo({
       name,
       email,
@@ -42,14 +37,16 @@ export const Profile = ({ logOut, onUpdateUserInfo }) => {
             onSubmit={handleSubmit}
           >
             <fieldset className="profile__group">
-              <legend className="profile__title">Привет, {name}</legend>
+              <legend className="profile__title">
+                Привет, {currentUser.name}
+              </legend>
               <label htmlFor="profile__name" className="profile__lable">
                 <span className="profile__input-title">Имя</span>
                 <input
                   id="profile__name"
                   name="name"
                   type="name"
-                  placeholder={"Your Name"}
+                  placeholder={currentUser.name}
                   className="profile__input"
                   required
                   value={name || ""}
@@ -62,7 +59,7 @@ export const Profile = ({ logOut, onUpdateUserInfo }) => {
                   id="profile__email"
                   name="email"
                   type="email"
-                  placeholder={"youremail@mail.com"}
+                  placeholder={currentUser.email}
                   className="profile__input"
                   required
                   value={email || ""}

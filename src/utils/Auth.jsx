@@ -10,17 +10,23 @@ const checkResponse = res =>
 export const register = (name, email, password) => {
   return fetch(`${MAIN_BACK_URL}/signup`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(name, email, password),
   }).then(checkResponse);
 };
 
 // АВТОРИЗАЦИЯ ПОЛЬЗОВАТЕЛЯ
-export const login = (email, password) => {
+export const login = (name, email, password) => {
   return fetch(`${MAIN_BACK_URL}/signin`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(email, password),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(name, email, password),
   }).then(checkResponse);
 };
 
