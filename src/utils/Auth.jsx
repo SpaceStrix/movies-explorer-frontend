@@ -27,7 +27,7 @@ export const login = (name, email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(name, email, password),
-  }).then(checkResponse);
+  }).then(res => checkResponse(res));
 };
 
 export const checkToken = token => {

@@ -20,12 +20,15 @@ import { Footer } from "../Footer/Footer";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as auth from "../../utils/Auth";
 import { mainApi } from "../../utils/MainApi";
-
+import { moviesApi } from "../../utils/MoviesApi";
 export const App = () => {
   // Состояния
   const [loggedIn, setLoggedIn] = useState(false); // Состояние авторизации
   const [loading, setLoading] = useState(true); // Состояние загрузки
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
+
+  // STATE для Movies
+  const [moviesAll, setMoviesAll] = useState([]); //
 
   // useNavigate
   const navigate = useNavigate();
@@ -40,25 +43,6 @@ export const App = () => {
       pathname === "/profile"
     );
   };
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
 
   // Проверка токена
   const tokenCheck = useCallback(async () => {
@@ -90,6 +74,16 @@ export const App = () => {
         .then(userData => {
           setLoggedIn(true);
           setCurrentUser(userData);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+
+      moviesApi
+        .getAllMovies()
+        .then(dataMovies => {
+          setLoggedIn(true);
+          setMoviesAll(dataMovies);
         })
         .catch(err => {
           console.error(err);
@@ -161,18 +155,18 @@ export const App = () => {
 
   return (
     <>
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header loggedIn={loggedIn} locationPath={locationPath(pathname)} />
-        {loading ? (
-          <Preloader />
-        ) : (
+      {loading ? (
+        <Preloader />
+      ) : (
+        <CurrentUserContext.Provider value={currentUser}>
+          <Header loggedIn={loggedIn} locationPath={locationPath(pathname)} />
           <Routes>
             <Route path="/" element={<Main />} />
             <Route
               path="/movies"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
-                  <Movies />
+                  <Movies moviesAll={moviesAll} />
                 </ProtectedRoute>
               }
             />
@@ -207,9 +201,9 @@ export const App = () => {
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-        )}
-        <Footer locationPath={locationPath(pathname)} />
-      </CurrentUserContext.Provider>
+          <Footer locationPath={locationPath(pathname)} />
+        </CurrentUserContext.Provider>
+      )}
     </>
   );
 };

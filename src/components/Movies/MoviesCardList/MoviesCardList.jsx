@@ -1,23 +1,20 @@
 import "./MoviesCardList.css";
-import { MoviesCard } from "../MoviesCard/MoviesCard";
 
-export const MoviesCardList = () => {
+import { useState } from "react";
+
+import { MoviesCard } from "../MoviesCard/MoviesCard";
+import { Preloader } from "../../Preloader/Preloader";
+
+export const MoviesCardList = ({ moviesAll }) => {
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+
   return (
     <section className="moviecardlist">
       <div className="moviecardlist-container">
         <ul className="moviecardlist__items">
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          {/* <MoviesCard />
-          <MoviesCard />
-          <MoviesCard /> */}
-          {/* <MoviesCard />
-          <MoviesCard /> */}
-          {/* <MoviesCard />
-          <MoviesCard /> */}
+          {moviesAll.map(card => {
+            return <MoviesCard card={card} key={card.id} />;
+          })}
         </ul>
         <div className="moviecardlist__more">
           <button
