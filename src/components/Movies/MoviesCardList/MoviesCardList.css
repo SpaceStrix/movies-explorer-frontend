@@ -31,6 +31,11 @@
   background-color: var(--color-gray);
 }
 
+.moviecardlist-notfound {
+  text-align: center;
+  color: #ff3535;
+}
+
 @media screen and (max-width: 768px) {
   .moviecardlist-container {
     width: calc(100% - 30px * 2);

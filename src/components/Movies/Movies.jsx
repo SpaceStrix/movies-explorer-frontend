@@ -10,7 +10,7 @@ export const Movies = ({ moviesAll }) => {
   const [searchQuery, setSearchQuery] = useState(""); // Ключевое слово поиска
   const [filterMovies, setFilterMovies] = useState([]);
   const [loading, setLoading] = useState(false); // Состояние загрузки
-  const [notFoundMovie, setNotFoundMovie] = useState(""); // Если нет резульатов поиска
+  const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
 
   // Записываем изначальный массив в стор.
   const setDataToLS = () => {
@@ -27,14 +27,17 @@ export const Movies = ({ moviesAll }) => {
       movie =>
         movie.nameRU.toLowerCase().includes(searchQuery.toLocaleLowerCase())
     );
+
     if (filterMovie.length !== 0) {
       localStorage.setItem("filterMovie", JSON.stringify(filterMovie));
 
       if (localStorage.getItem("filterMovie")) {
+        setNotFoundMovie(false);
         setFilterMovies(JSON.parse(localStorage.getItem("filterMovie")));
       }
     } else {
-      setNotFoundMovie("«Ничего не найдено»");
+      localStorage.setItem("filterMovie", JSON.stringify([]));
+      setNotFoundMovie(true);
     }
   };
 
