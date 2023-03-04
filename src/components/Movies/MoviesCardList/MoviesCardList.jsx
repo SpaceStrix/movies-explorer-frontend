@@ -1,18 +1,23 @@
 import "./MoviesCardList.css";
-
-import { useState } from "react";
-
 import { MoviesCard } from "../MoviesCard/MoviesCard";
-import { Preloader } from "../../Preloader/Preloader";
 
-export const MoviesCardList = ({ moviesAll }) => {
-  const [loading, setLoading] = useState(true); // Состояние загрузки
+import { useEffect, useState } from "react";
+
+export const MoviesCardList = ({ filterMovies, notFoundMovie }) => {
+  console.log(notFoundMovie);
+  const [getData, setGetData] = useState([]);
+
+  useEffect(() => {
+    setGetData(JSON.parse(localStorage.getItem("filterMovie")) || filterMovies);
+  }, [filterMovies]);
+
+  useEffect(() => {}, [notFoundMovie]);
 
   return (
     <section className="moviecardlist">
       <div className="moviecardlist-container">
         <ul className="moviecardlist__items">
-          {moviesAll.map(card => {
+          {getData.map(card => {
             return <MoviesCard card={card} key={card.id} />;
           })}
         </ul>

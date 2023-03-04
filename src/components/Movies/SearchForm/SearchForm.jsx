@@ -1,28 +1,19 @@
 import "./SearchForm.css";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-export const SearchForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({ mode: "onChange" });
-  const onSubmit = data => {
-    setInputValue(data);
-    reset();
+export const SearchForm = ({ setSearchQuery, onHandleForm }) => {
+  const handleSubmit = e => {
+    e.preventDefault();
+    onHandleForm();
   };
 
-  //
-  const [inputValue, setInputValue] = useState();
   return (
     <section className="seachform">
       <div className="seachform-container">
         <form
           action=""
           className="seachform-form"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit}
           noValidate
         >
           <fieldset className="seachform-stroke">
@@ -31,15 +22,10 @@ export const SearchForm = () => {
                 autoComplete="off"
                 type="text"
                 name="search"
+                onChange={e => setSearchQuery(e.target.value)}
                 className="seachform-stroke__input"
                 placeholder="Фильм"
-                {...register("search", {
-                  required: "Нужно ввести ключевое слово",
-                })}
               />
-              <span className="search-error-message">
-                {errors?.search?.message}
-              </span>
             </label>
             <button
               className="seachform-stroke__btn btn btn_effect"
@@ -47,7 +33,11 @@ export const SearchForm = () => {
             ></button>
           </fieldset>
           <fieldset className="seachform-check">
-            <input type="checkbox" className="seachform-check__checkbox" />
+            <input
+              type="checkbox"
+              name="shortDuration"
+              className="seachform-check__checkbox"
+            />
             <p className="seachform-check__text">Короткометражки</p>
           </fieldset>
         </form>

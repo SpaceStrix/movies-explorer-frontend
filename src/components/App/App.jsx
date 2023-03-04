@@ -79,10 +79,10 @@ export const App = () => {
           console.error(err);
         });
 
+      // Получаем все фильмы
       moviesApi
         .getAllMovies()
         .then(dataMovies => {
-          setLoggedIn(true);
           setMoviesAll(dataMovies);
         })
         .catch(err => {
