@@ -3,11 +3,25 @@ import { MoviesCard } from "../MoviesCard/MoviesCard";
 
 import { useEffect, useState } from "react";
 
-export const MoviesCardList = ({ filterMovies, notFoundMovie }) => {
+export const MoviesCardList = ({ filterMovies, notFoundMovie, checked }) => {
   const [getData, setGetData] = useState([]);
 
   useEffect(() => {
-    setGetData(JSON.parse(localStorage.getItem("filterMovie")) || filterMovies);
+    const enterData = JSON.parse(localStorage.getItem("filterMovie"));
+    const propFilter = JSON.parse(localStorage.getItem("checkBoxLS"));
+    console.log(propFilter);
+
+    // фильтр по продолжительности
+    // const shortData = enterData.filter(card => {
+    //   return card.duration <= 40 ? card.duration <= 40 : null;
+    // });
+
+    // Чекбокс он\офф
+    // propFilter
+    //   ? setGetData(enterData || filterMovies)
+    //   : setGetData(shortData || filterMovies);
+
+    setGetData(enterData || filterMovies);
   }, [filterMovies]);
 
   return (

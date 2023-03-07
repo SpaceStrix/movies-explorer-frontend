@@ -11,6 +11,7 @@ export const Movies = ({ moviesAll }) => {
   const [filterMovies, setFilterMovies] = useState([]);
   const [loading, setLoading] = useState(false); // Состояние загрузки
   const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
+  const [checked, setCheckBox] = useState(false); // Состояние чекбокса
 
   // Записываем изначальный массив в стор.
   const setDataToLS = () => {
@@ -41,22 +42,40 @@ export const Movies = ({ moviesAll }) => {
     }
   };
 
+  useEffect(() => {
+    const queryFromLS = localStorage.getItem("searchQuery");
+    setSearchQuery(queryFromLS);
+  }, []);
+
+  const handleChange = () => {
+    setCheckBox(!checked);
+    localStorage.setItem("checkBoxLS", checked);
+  };
+
   // Передаем данные при сабмите
   const onHandleForm = () => {
     setDataToLS();
     filteredMovies(searchQuery);
+
+    localStorage.setItem("searchQuery", searchQuery);
   };
+
   return (
     <>
       <main className="main">
         <SearchForm
-          setSearchQuery={setSearchQuery}
           onHandleForm={onHandleForm}
+          setSearchQuery={setSearchQuery}
+          searchQuery={searchQuery}
+          checked={checked}
+          setCheckBox={setCheckBox}
+          handleChange={handleChange}
         />
         {loading ? (
           <Preloader />
         ) : (
           <MoviesCardList
+            checked={checked}
             filterMovies={filterMovies}
             setLoading={setLoading}
             notFoundMovie={notFoundMovie}

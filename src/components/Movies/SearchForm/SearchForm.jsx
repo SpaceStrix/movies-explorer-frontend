@@ -1,7 +1,13 @@
 import "./SearchForm.css";
 import { useState } from "react";
 
-export const SearchForm = ({ setSearchQuery, onHandleForm }) => {
+export const SearchForm = ({
+  setSearchQuery,
+  onHandleForm,
+  checked,
+  searchQuery,
+  handleChange,
+}) => {
   const handleSubmit = e => {
     e.preventDefault();
     onHandleForm();
@@ -22,6 +28,7 @@ export const SearchForm = ({ setSearchQuery, onHandleForm }) => {
                 autoComplete="off"
                 type="text"
                 name="search"
+                value={searchQuery || ""}
                 onChange={e => setSearchQuery(e.target.value)}
                 className="seachform-stroke__input"
                 placeholder="Фильм"
@@ -35,6 +42,8 @@ export const SearchForm = ({ setSearchQuery, onHandleForm }) => {
           <fieldset className="seachform-check">
             <input
               type="checkbox"
+              checked={checked}
+              onChange={handleChange}
               name="shortDuration"
               className="seachform-check__checkbox"
             />
