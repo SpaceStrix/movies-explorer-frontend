@@ -67,6 +67,7 @@ export const App = () => {
     }
   }, []);
 
+  // Запросы
   useEffect(() => {
     if (loggedIn) {
       mainApi
@@ -83,6 +84,7 @@ export const App = () => {
       moviesApi
         .getAllMovies()
         .then(dataMovies => {
+          // localStorage.setItem("allMovies", JSON.stringify(dataMovies));
           setMoviesAll(dataMovies);
         })
         .catch(err => {
@@ -151,6 +153,7 @@ export const App = () => {
     setLoggedIn(false);
     setCurrentUser({});
     navigate("signin");
+    // localStorage.clear();
   };
 
   return (

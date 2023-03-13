@@ -4,80 +4,86 @@ import { useState, useEffect } from "react";
 
 import { SearchForm } from "../Movies/SearchForm/SearchForm";
 import { MoviesCardList } from "../Movies/MoviesCardList/MoviesCardList";
+
+import { filtersMovies, filtersMoviesDuration } from "../../utils/utils";
+
 import { Preloader } from "../Preloader/Preloader";
 
 export const Movies = ({ moviesAll }) => {
-  const [searchQuery, setSearchQuery] = useState(""); // Ключевое слово поиска
-  const [filterMovies, setFilterMovies] = useState([]);
-  const [loading, setLoading] = useState(false); // Состояние загрузки
+  useEffect(() => {
+    localStorage.setItem("allMovies", JSON.stringify(moviesAll));
+  }, [moviesAll]);
+
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+
+  const [searchQuery, setSearchQuery] = useState(
+    localStorage.getItem("searchQuery")
+  ); // Строка поиска
+
+  const [filterMovies, setFilterMovies] = useState(
+    JSON.parse(localStorage.getItem("filteredMovies")) || []
+  ); // Отфильтрованные данные
+
   const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
-  const [checked, setCheckBox] = useState(false); // Состояние чекбокса
 
-  // Записываем изначальный массив в стор.
-  const setDataToLS = () => {
-    const allMovies = localStorage.setItem(
-      "allMovies",
-      JSON.stringify(moviesAll)
-    );
-    return allMovies;
-  };
-
-  // Фильтуем фильмы по ключевому слову и записываем в стор.
-  const filteredMovies = searchQuery => {
-    const filterMovie = JSON.parse(localStorage.getItem("allMovies")).filter(
-      movie =>
-        movie.nameRU.toLowerCase().includes(searchQuery.toLocaleLowerCase())
-    );
-
-    if (filterMovie.length !== 0) {
-      localStorage.setItem("filterMovie", JSON.stringify(filterMovie));
-
-      if (localStorage.getItem("filterMovie")) {
-        setNotFoundMovie(false);
-        setFilterMovies(JSON.parse(localStorage.getItem("filterMovie")));
-      }
-    } else {
-      localStorage.setItem("filterMovie", JSON.stringify([]));
-      setNotFoundMovie(true);
-    }
-  };
+  const [checkedShort, setCheckBox] = useState(
+    localStorage.getItem("checked") === "true"
+  ); // Состояние чекбокса
 
   useEffect(() => {
-    const queryFromLS = localStorage.getItem("searchQuery");
-    setSearchQuery(queryFromLS);
-  }, []);
+    setLoading(true);
+    if (filterMovies.length === 0) {
+      setNotFoundMovie(true);
+    } else {
+      setNotFoundMovie(false);
+    }
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [filterMovies]);
 
-  const handleChange = () => {
-    setCheckBox(!checked);
-    localStorage.setItem("checkBoxLS", checked);
-  };
+  //b Сабмит формы
+  const onHandleSearchForm = (searchQuery, checkedShort) => {
+    const dataMovies = JSON.parse(localStorage.getItem("allMovies")); // Все фильмы из LS
 
-  // Передаем данные при сабмите
-  const onHandleForm = () => {
-    setDataToLS();
-    filteredMovies(searchQuery);
+    const allFilteredMovie = filtersMovies(
+      searchQuery,
+      dataMovies,
+      setNotFoundMovie
+    );
 
-    localStorage.setItem("searchQuery", searchQuery);
+    const durationFilteredMovies = filtersMoviesDuration(
+      searchQuery,
+      checkedShort,
+      dataMovies,
+      setNotFoundMovie
+    );
+    const filtered = checkedShort ? durationFilteredMovies : allFilteredMovie;
+
+    setFilterMovies(filtered);
+
+    localStorage.setItem("filteredMovies", JSON.stringify(filtered));
+    localStorage.setItem("searchQuery", searchQuery); //* сохраням строку поиска в стор
+    localStorage.setItem("checked", checkedShort); //* сохраням строку поиска в стор
   };
 
   return (
     <>
       <main className="main">
         <SearchForm
-          onHandleForm={onHandleForm}
+          onHandleSearchForm={onHandleSearchForm}
           setSearchQuery={setSearchQuery}
           searchQuery={searchQuery}
-          checked={checked}
+          checkedShort={checkedShort}
           setCheckBox={setCheckBox}
-          handleChange={handleChange}
         />
         {loading ? (
           <Preloader />
         ) : (
           <MoviesCardList
-            checked={checked}
+            setNotFoundMovie={setNotFoundMovie}
+            checkedShort={checkedShort}
             filterMovies={filterMovies}
-            setLoading={setLoading}
             notFoundMovie={notFoundMovie}
           />
         )}

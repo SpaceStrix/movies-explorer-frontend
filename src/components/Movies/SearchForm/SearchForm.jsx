@@ -1,16 +1,23 @@
 import "./SearchForm.css";
-import { useState } from "react";
 
 export const SearchForm = ({
+  onHandleSearchForm,
   setSearchQuery,
-  onHandleForm,
-  checked,
+  checkedShort,
   searchQuery,
-  handleChange,
+  setCheckBox,
 }) => {
   const handleSubmit = e => {
     e.preventDefault();
-    onHandleForm();
+    onHandleSearchForm(searchQuery, checkedShort);
+  };
+
+  const handleChange = e => {
+    localStorage.setItem("checked", `${e.target.checked}`);
+    setCheckBox(e.target.checked);
+
+    onHandleSearchForm(searchQuery, !checkedShort);
+    setCheckBox(!checkedShort);
   };
 
   return (
@@ -42,7 +49,7 @@ export const SearchForm = ({
           <fieldset className="seachform-check">
             <input
               type="checkbox"
-              checked={checked}
+              checked={checkedShort}
               onChange={handleChange}
               name="shortDuration"
               className="seachform-check__checkbox"
