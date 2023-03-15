@@ -20,9 +20,7 @@ export const Movies = ({ moviesAll }) => {
     localStorage.getItem("searchQuery")
   ); // Строка поиска
 
-  const [filterMovies, setFilterMovies] = useState(
-    JSON.parse(localStorage.getItem("filteredMovies")) || []
-  ); // Отфильтрованные данные
+  const [filterMovies, setFilterMovies] = useState([]); // Отфильтрованные данные
 
   const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
 
@@ -31,12 +29,21 @@ export const Movies = ({ moviesAll }) => {
   ); // Состояние чекбокса
 
   useEffect(() => {
+    setFilterMovies(JSON.parse(localStorage.getItem("filteredMovies")));
+  }, []);
+
+  useEffect(() => {
     setLoading(true);
-    if (filterMovies.length === 0) {
-      setNotFoundMovie(true);
-    } else {
+    if (JSON.parse(localStorage.getItem("filteredMovies")) === null) {
       setNotFoundMovie(false);
+    } else {
+      if (filterMovies.length === 0) {
+        setNotFoundMovie(true);
+      } else {
+        setNotFoundMovie(false);
+      }
     }
+
     setTimeout(() => {
       setLoading(false);
     }, 500);

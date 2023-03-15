@@ -14,8 +14,8 @@ export const SavedMovies = ({ loggedIn }) => {
           <SearchForm />
           <div className="savedmovies-container">
             <ul className="savedmovies__items">
-              <MoviesCard />
-              <MoviesCard />
+              {/* <MoviesCard /> */}
+              {/* <MoviesCard /> */}
             </ul>
           </div>
         </section>
