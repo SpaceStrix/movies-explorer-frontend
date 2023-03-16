@@ -2,7 +2,7 @@ import "./MoviesCardList.css";
 import { MoviesCard } from "../MoviesCard/MoviesCard";
 import { useState, useEffect } from "react";
 
-export const MoviesCardList = ({ filterMovies, notFoundMovie }) => {
+export const MoviesCardList = ({ filterMovies, notFoundMovie, onCardLike }) => {
   const [width, setWidth] = useState(window.innerWidth);
   const [addMore, setAddMore] = useState(0);
   const [sliceData, setSliceData] = useState([]);
@@ -57,7 +57,13 @@ export const MoviesCardList = ({ filterMovies, notFoundMovie }) => {
         ) : (
           <ul className="moviecardlist__items">
             {sliceData.map(card => {
-              return <MoviesCard card={card} key={card.id} />;
+              return (
+                <MoviesCard
+                  card={card}
+                  key={card._id || card.id}
+                  onCardLike={onCardLike}
+                />
+              );
             })}
           </ul>
         )}

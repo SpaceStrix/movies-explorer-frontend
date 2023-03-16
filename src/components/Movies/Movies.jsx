@@ -9,7 +9,7 @@ import { filtersMovies, filtersMoviesDuration } from "../../utils/utils";
 
 import { Preloader } from "../Preloader/Preloader";
 
-export const Movies = ({ moviesAll }) => {
+export const Movies = ({ moviesAll, handleCardLike }) => {
   useEffect(() => {
     localStorage.setItem("allMovies", JSON.stringify(moviesAll));
   }, [moviesAll]);
@@ -20,17 +20,15 @@ export const Movies = ({ moviesAll }) => {
     localStorage.getItem("searchQuery")
   ); // Строка поиска
 
-  const [filterMovies, setFilterMovies] = useState([]); // Отфильтрованные данные
+  const [filterMovies, setFilterMovies] = useState(
+    JSON.parse(localStorage.getItem("filteredMovies")) || []
+  ); // Отфильтрованные данные
 
   const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
 
   const [checkedShort, setCheckBox] = useState(
     localStorage.getItem("checked") === "true"
   ); // Состояние чекбокса
-
-  useEffect(() => {
-    setFilterMovies(JSON.parse(localStorage.getItem("filteredMovies")));
-  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -88,6 +86,7 @@ export const Movies = ({ moviesAll }) => {
           <Preloader />
         ) : (
           <MoviesCardList
+            onCardLike={handleCardLike}
             setNotFoundMovie={setNotFoundMovie}
             checkedShort={checkedShort}
             filterMovies={filterMovies}

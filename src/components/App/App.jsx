@@ -29,7 +29,7 @@ export const App = () => {
 
   // STATE для Movies
   const [moviesAll, setMoviesAll] = useState([]); //
-
+  const [savedMovies, setSevedMovies] = useState([]);
   // useNavigate
   const navigate = useNavigate();
 
@@ -75,6 +75,15 @@ export const App = () => {
         .then(userData => {
           setLoggedIn(true);
           setCurrentUser(userData);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+      // Сохраненные фильмы
+      mainApi
+        .getSavedMovies()
+        .then(data => {
+          setSevedMovies(data);
         })
         .catch(err => {
           console.error(err);
@@ -147,6 +156,32 @@ export const App = () => {
       .finally(() => setLoading(false));
   };
 
+  //
+  //
+  //
+  //
+  //
+  //
+  const handleCardLike = movie => {
+    mainApi
+      .likeMovie(movie)
+      .then(movie => {
+        setSevedMovies([...savedMovies, movie]);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+  //
+
   // Выход
   const logOut = () => {
     localStorage.removeItem("jwt");
@@ -169,7 +204,10 @@ export const App = () => {
               path="/movies"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
-                  <Movies moviesAll={moviesAll} />
+                  <Movies
+                    moviesAll={moviesAll}
+                    handleCardLike={handleCardLike}
+                  />
                 </ProtectedRoute>
               }
             />
@@ -177,7 +215,7 @@ export const App = () => {
               path="/saved-movies"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
-                  <SavedMovies />
+                  <SavedMovies savedMovies={savedMovies} />
                 </ProtectedRoute>
               }
             />

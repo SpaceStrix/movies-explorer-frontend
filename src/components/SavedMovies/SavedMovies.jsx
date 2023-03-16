@@ -1,26 +1,65 @@
 import "./SavedMovies.css";
-
+import { useState, useEffect } from "react";
 import { SearchForm } from "../Movies/SearchForm/SearchForm";
-import { MoviesCard } from "../Movies/MoviesCard/MoviesCard";
-// import { Header } from "../Header/Header";
-// import { Footer } from "../Footer/Footer";
+import { MoviesCardList } from "../Movies/MoviesCardList/MoviesCardList";
+import { filtersMovies, filtersMoviesDuration } from "../../utils/utils";
+import { Preloader } from "../Preloader/Preloader";
 
-export const SavedMovies = ({ loggedIn }) => {
+export const SavedMovies = ({ savedMovies }) => {
+  const [searchQuery, setSearchQuery] = useState(
+    localStorage.getItem("searchQuery")
+  );
+  const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
+  const [checkedShort, setCheckBox] = useState(
+    localStorage.getItem("checked") === "true"
+  );
+
+  const [savedMov, setSavedMov] = useState([]);
+
+  useEffect(() => {
+    setSavedMov(savedMovies);
+  }, [savedMovies]);
+
+  //b Сабмит формы
+  const onHandleSearchForm = (searchQuery, checkedShort) => {
+    const allFilteredMovie = filtersMovies(
+      searchQuery,
+      savedMovies,
+      setNotFoundMovie
+    );
+
+    const durationFilteredMovies = filtersMoviesDuration(
+      searchQuery,
+      checkedShort,
+      savedMovies,
+      setNotFoundMovie
+    );
+    const filtered = checkedShort ? durationFilteredMovies : allFilteredMovie;
+
+    setSavedMov(filtered);
+
+    localStorage.setItem("searchQuery", searchQuery); //* сохраням строку поиска в стор
+    localStorage.setItem("checked", checkedShort); //* сохраням строку поиска в стор
+  };
+
   return (
-    <>
-      {/* <Header loggedIn={loggedIn} /> */}
-      <main className="main">
-        <section className="savedmovies">
-          <SearchForm />
-          <div className="savedmovies-container">
-            <ul className="savedmovies__items">
-              {/* <MoviesCard /> */}
-              {/* <MoviesCard /> */}
-            </ul>
-          </div>
-        </section>
-      </main>
-      {/* <Footer /> */}
-    </>
+    <main className="main">
+      <section className="savedmovies">
+        <SearchForm
+          onHandleSearchForm={onHandleSearchForm}
+          setSearchQuery={setSearchQuery}
+          searchQuery={searchQuery}
+          checkedShort={checkedShort}
+          setCheckBox={setCheckBox}
+        />
+
+        <MoviesCardList
+          setNotFoundMovie={setNotFoundMovie}
+          checkedShort={checkedShort}
+          filterMovies={savedMov}
+          notFoundMovie={notFoundMovie}
+        />
+      </section>
+    </main>
   );
 };
