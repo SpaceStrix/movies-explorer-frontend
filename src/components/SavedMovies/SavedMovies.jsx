@@ -5,7 +5,7 @@ import { MoviesCardList } from "../Movies/MoviesCardList/MoviesCardList";
 import { filtersMovies, filtersMoviesDuration } from "../../utils/utils";
 import { Preloader } from "../Preloader/Preloader";
 
-export const SavedMovies = ({ savedMovies }) => {
+export const SavedMovies = ({ savedMovies, onCardLike, onRemoveMovie }) => {
   const [searchQuery, setSearchQuery] = useState(
     localStorage.getItem("searchQuery")
   );
@@ -13,7 +13,6 @@ export const SavedMovies = ({ savedMovies }) => {
   const [checkedShort, setCheckBox] = useState(
     localStorage.getItem("checked") === "true"
   );
-
   const [savedMov, setSavedMov] = useState([]);
 
   useEffect(() => {
@@ -38,8 +37,8 @@ export const SavedMovies = ({ savedMovies }) => {
 
     setSavedMov(filtered);
 
-    localStorage.setItem("searchQuery", searchQuery); //* сохраням строку поиска в стор
-    localStorage.setItem("checked", checkedShort); //* сохраням строку поиска в стор
+    // localStorage.setItem("searchQuery", searchQuery); //* сохраням строку поиска в стор
+    // localStorage.setItem("checked", checkedShort); //* сохраням строку поиска в стор
   };
 
   return (
@@ -58,6 +57,8 @@ export const SavedMovies = ({ savedMovies }) => {
           checkedShort={checkedShort}
           filterMovies={savedMov}
           notFoundMovie={notFoundMovie}
+          onCardLike={onCardLike}
+          onRemoveMovie={onRemoveMovie}
         />
       </section>
     </main>

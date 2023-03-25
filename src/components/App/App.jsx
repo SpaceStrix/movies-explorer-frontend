@@ -21,6 +21,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as auth from "../../utils/Auth";
 import { mainApi } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
+
 export const App = () => {
   // Состояния
   const [loggedIn, setLoggedIn] = useState(false); // Состояние авторизации
@@ -30,11 +31,9 @@ export const App = () => {
   // STATE для Movies
   const [moviesAll, setMoviesAll] = useState([]); //
   const [savedMovies, setSevedMovies] = useState([]);
-  // useNavigate
-  const navigate = useNavigate();
 
-  // useLocation
-  const { pathname } = useLocation(); // Забираем из объекта локации pathname
+  const navigate = useNavigate();
+  const { pathname } = useLocation(); // Забираем из объекта локации
   const locationPath = pathname => {
     return (
       pathname === "/" ||
@@ -106,7 +105,7 @@ export const App = () => {
     tokenCheck();
   }, []);
 
-  // Обвновление профиля
+  // Обновление профиля
   const handleUpdateUser = newData => {
     mainApi
       .setNewUserInfo(newData)
@@ -162,11 +161,28 @@ export const App = () => {
   //
   //
   //
+
   const handleCardLike = movie => {
+    // const isLiked = savedMovies.some(whoLiked => whoLiked.movieId === movie.id);
     mainApi
       .likeMovie(movie)
-      .then(movie => {
-        setSevedMovies([...savedMovies, movie]);
+      .then(newMovie => {
+        setSevedMovies([newMovie, ...savedMovies]);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  const handleCardRemove = movie_id => {
+    console.log(movie_id);
+    mainApi
+      .removeCard(movie_id)
+      .then(() => {
+        const isLiked = savedMovies.filter(item => {
+          return item.movieId !== movie_id.id;
+        });
+        setSevedMovies(isLiked);
       })
       .catch(err => {
         console.error(err);
@@ -174,7 +190,6 @@ export const App = () => {
   };
   //
   //
-
   //
   //
   //
@@ -206,7 +221,8 @@ export const App = () => {
                 <ProtectedRoute loggedIn={loggedIn}>
                   <Movies
                     moviesAll={moviesAll}
-                    handleCardLike={handleCardLike}
+                    onCardLike={handleCardLike}
+                    onRemoveMovie={handleCardRemove}
                   />
                 </ProtectedRoute>
               }
@@ -215,7 +231,11 @@ export const App = () => {
               path="/saved-movies"
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
-                  <SavedMovies savedMovies={savedMovies} />
+                  <SavedMovies
+                    onCardLike={handleCardLike}
+                    savedMovies={savedMovies}
+                    onRemoveMovie={handleCardRemove}
+                  />
                 </ProtectedRoute>
               }
             />

@@ -9,27 +9,23 @@ import { filtersMovies, filtersMoviesDuration } from "../../utils/utils";
 
 import { Preloader } from "../Preloader/Preloader";
 
-export const Movies = ({ moviesAll, handleCardLike }) => {
+export const Movies = ({ moviesAll, onCardLike, onRemoveMovie }) => {
+  //b useState
+  const [loading, setLoading] = useState(true); // Состояние загрузки
+  const [searchQuery, setSearchQuery] = useState(
+    localStorage.getItem("searchQuery")
+  );
+  const [filterMovies, setFilterMovies] = useState(
+    JSON.parse(localStorage.getItem("filteredMovies")) || []
+  );
+  const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
+  const [checkedShort, setCheckBox] = useState(
+    localStorage.getItem("checked") === "true"
+  );
+
   useEffect(() => {
     localStorage.setItem("allMovies", JSON.stringify(moviesAll));
   }, [moviesAll]);
-
-  const [loading, setLoading] = useState(true); // Состояние загрузки
-
-  const [searchQuery, setSearchQuery] = useState(
-    localStorage.getItem("searchQuery")
-  ); // Строка поиска
-
-  const [filterMovies, setFilterMovies] = useState(
-    JSON.parse(localStorage.getItem("filteredMovies")) || []
-  ); // Отфильтрованные данные
-
-  const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
-
-  const [checkedShort, setCheckBox] = useState(
-    localStorage.getItem("checked") === "true"
-  ); // Состояние чекбокса
-
   useEffect(() => {
     setLoading(true);
     if (JSON.parse(localStorage.getItem("filteredMovies")) === null) {
@@ -86,7 +82,8 @@ export const Movies = ({ moviesAll, handleCardLike }) => {
           <Preloader />
         ) : (
           <MoviesCardList
-            onCardLike={handleCardLike}
+            onCardLike={onCardLike}
+            onRemoveMovie={onRemoveMovie}
             setNotFoundMovie={setNotFoundMovie}
             checkedShort={checkedShort}
             filterMovies={filterMovies}

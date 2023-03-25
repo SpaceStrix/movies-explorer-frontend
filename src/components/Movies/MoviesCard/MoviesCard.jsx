@@ -1,25 +1,44 @@
 import "./MoviesCard.css";
-import React, { useContext } from "react";
 
+import { useLocation } from "react-router-dom";
 import { numbetToTime } from "../../../utils/utils";
 
-export const MoviesCard = ({ card, onCardLike }) => {
+export const MoviesCard = ({
+  card,
+  filterMovies,
+  onCardLike,
+  onRemoveMovie,
+}) => {
+  const location = useLocation();
+
+  const isLiked = filterMovies.some(item => item);
+  // console.log(card.movieId);
+
+  const cardLikeButtonClassName = `card__like ${
+    isLiked ? "card__like_active" : " "
+  }`;
+
+  const toggleStateLike = () => {
+    if (!isLiked) {
+      handleRemoveCard();
+    } else {
+      handleLikeCard(card);
+    }
+  };
+
   const handleLikeCard = () => onCardLike(card);
-  // const isLiked = card.some(i => i._id === currentUser._id);
-  // const cardLikeButtonClassName = `element__like ${
-  //   isLiked ? "element__like_active" : " "
-  // }`;
+  const handleRemoveCard = () => onRemoveMovie(card._id);
+
+  const locationImage =
+    location.pathname === "/saved-movies"
+      ? `${card.image}`
+      : `https://api.nomoreparties.co/${card.image.url}`;
 
   return (
     <>
       <li className="card">
         <a href={card.trailerLink} target="_blank" rel="noreferrer">
-          <img
-            // src={`https://api.nomoreparties.co/${card.image.url}`}
-            src={`${card.image}`}
-            alt={card.nameRU}
-            className="card__img"
-          />
+          <img src={locationImage} alt={card.nameRU} className="card__img" />
         </a>
         <div className="card__content">
           <div className="card__info">
@@ -27,10 +46,10 @@ export const MoviesCard = ({ card, onCardLike }) => {
             <p className="card__duration">{numbetToTime(card.duration)}</p>
           </div>
           <button
-            className="card__like"
+            className={cardLikeButtonClassName}
             aria-label="Кнопка лайка"
             type="button"
-            onClick={handleLikeCard}
+            onClick={toggleStateLike}
           ></button>
         </div>
       </li>

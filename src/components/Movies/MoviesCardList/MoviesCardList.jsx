@@ -2,7 +2,12 @@ import "./MoviesCardList.css";
 import { MoviesCard } from "../MoviesCard/MoviesCard";
 import { useState, useEffect } from "react";
 
-export const MoviesCardList = ({ filterMovies, notFoundMovie, onCardLike }) => {
+export const MoviesCardList = ({
+  filterMovies,
+  notFoundMovie,
+  onCardLike,
+  onRemoveMovie,
+}) => {
   const [width, setWidth] = useState(window.innerWidth);
   const [addMore, setAddMore] = useState(0);
   const [sliceData, setSliceData] = useState([]);
@@ -60,8 +65,10 @@ export const MoviesCardList = ({ filterMovies, notFoundMovie, onCardLike }) => {
               return (
                 <MoviesCard
                   card={card}
+                  filterMovies={filterMovies}
                   key={card._id || card.id}
                   onCardLike={onCardLike}
+                  onRemoveMovie={onRemoveMovie}
                 />
               );
             })}
