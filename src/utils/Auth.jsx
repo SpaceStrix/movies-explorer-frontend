@@ -1,5 +1,5 @@
-export const MAIN_BACK_URL = "http://localhost:3005"; //МОЙ БЭК
-// export const MAIN_BACK_URL = "https://api.moviespace.nomoredomainsclub.ru/"; //МОЙ БЭК Сервера
+// export const MAIN_BACK_URL = "http://localhost:3005"; //МОЙ БЭК
+export const MAIN_BACK_URL = "https://api.moviespace.nomoredomainsclub.ru"; //МОЙ БЭК Сервера
 // export const MOVIE_BACK_URL = "https://api.nomoreparties.co/beatfilm-movies"; // БЭК ФИЛЬМОВ
 
 //  Первоночальный ответ сервера, вернет либо json, либо Promise
