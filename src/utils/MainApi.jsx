@@ -95,5 +95,6 @@ class MainApi {
   }
 }
 
+// const configApi = "http://localhost:3005";
 const configApi = "https://api.moviespace.nomoredomainsclub.ru";
 export const mainApi = new MainApi(configApi);
