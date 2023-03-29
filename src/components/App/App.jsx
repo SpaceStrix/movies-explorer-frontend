@@ -27,6 +27,7 @@ export const App = () => {
   const [loggedIn, setLoggedIn] = useState(false); // Состояние авторизации
   const [loading, setLoading] = useState(true); // Состояние загрузки
   const [currentUser, setCurrentUser] = useState({}); // Контекст текущего пользователя
+  const [errAuth, setErrAuth] = useState("");
 
   // STATE для Movies
   const [moviesAll, setMoviesAll] = useState([]); //
@@ -43,7 +44,7 @@ export const App = () => {
     );
   };
 
-  // Проверка токена
+  //b Проверка токена
   const tokenCheck = useCallback(async () => {
     try {
       setLoading(true);
@@ -66,7 +67,7 @@ export const App = () => {
     }
   }, []);
 
-  // Запросы
+  //b Запросы
   useEffect(() => {
     if (loggedIn) {
       // mainApi
@@ -108,29 +109,13 @@ export const App = () => {
     }
   }, [loggedIn]);
 
-  useEffect(() => {
-    tokenCheck();
-  }, []);
-
-  // Обновление профиля
-  const handleUpdateUser = newData => {
-    mainApi
-      .setNewUserInfo(newData)
-      .then(data => {
-        setCurrentUser(data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
-
   const onAuth = useCallback(data => {
     localStorage.setItem("jwt", data.token);
     setLoggedIn(true);
     navigate("/");
   }, []);
 
-  // Регистрация
+  //b Регистрация
   const onRegistration = ({ name, email, password }) => {
     auth
       .register({ name, email, password })
@@ -139,11 +124,12 @@ export const App = () => {
         navigate("/signin");
         return data;
       })
-      .catch(() => {})
+      .catch(err => {
+        setErrAuth(err);
+      })
       .finally(() => setLoading(false));
   };
-
-  // Авторизация
+  //b Авторизация
   const onLogin = ({ password, email }) => {
     auth
       .login({ password, email })
@@ -158,17 +144,23 @@ export const App = () => {
         navigate("/movies");
         return data;
       })
-      .catch(() => {})
+      .catch(err => {
+        setErrAuth(err);
+      })
       .finally(() => setLoading(false));
   };
-
-  //
-  //
-  //
-  //
-  //
-  //
-
+  //b Обновление профиля
+  const handleUpdateUser = newData => {
+    mainApi
+      .setNewUserInfo(newData)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .catch(err => {
+        setErrAuth(err);
+      });
+  };
+  //b Сохранение фильма
   const handleCardLike = movie => {
     mainApi
       .likeMovie(movie)
@@ -179,7 +171,7 @@ export const App = () => {
         console.error(err);
       });
   };
-
+  //b Удаление фильма
   const handleCardRemove = movie => {
     const returnMovie = movie._id
       ? movie
@@ -195,23 +187,21 @@ export const App = () => {
         console.error(err);
       });
   };
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-
-  // Выход
+  //b Выход
   const logOut = () => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("allMovies");
+    localStorage.removeItem("checked");
+    localStorage.removeItem("searchQuery");
+    localStorage.removeItem("filteredMovies");
     setLoggedIn(false);
     setCurrentUser({});
     navigate("signin");
-    // localStorage.clear();
   };
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
   return (
     <>
@@ -253,6 +243,7 @@ export const App = () => {
                   <Profile
                     logOut={logOut}
                     onUpdateUserInfo={handleUpdateUser}
+                    errAuth={errAuth}
                   />
                 </ProtectedRoute>
               }
@@ -260,12 +251,22 @@ export const App = () => {
             <Route
               path="/signup"
               element={
-                <Register onRegistration={onRegistration} loggedIn={loggedIn} />
+                <Register
+                  onRegistration={onRegistration}
+                  loggedIn={loggedIn}
+                  errAuth={errAuth}
+                />
               }
             />
             <Route
               path="/signin"
-              element={<Login onLogin={onLogin} loggedIn={loggedIn} />}
+              element={
+                <Login
+                  onLogin={onLogin}
+                  loggedIn={loggedIn}
+                  errAuth={errAuth}
+                />
+              }
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

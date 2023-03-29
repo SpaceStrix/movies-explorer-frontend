@@ -6,21 +6,14 @@ const numbetToTime = duration => {
 
 //b Сортировка по запросу
 const filtersMovies = (searchQuery, moviesAll, setNotFoundMovie) => {
-  // if (searchQuery === null) {
-  //   searchQuery = "";
-  // }
   const filter = moviesAll.filter(movie => {
     return movie.nameRU.toLowerCase().includes(searchQuery || "".toLowerCase());
   });
-
   return filter;
 };
 
 //b Сортировка по запросу и чекбоксу
 const filtersMoviesDuration = (searchQuery, checkedShort, moviesAll) => {
-  // if (searchQuery === null) {
-  //   searchQuery = "";
-  // }
   const filterDuration = moviesAll.filter(movie => {
     return (
       movie.nameRU.toLowerCase().includes(searchQuery || "".toLowerCase()) &&

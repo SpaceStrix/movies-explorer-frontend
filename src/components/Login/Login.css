@@ -88,6 +88,13 @@
   bottom: 0;
 }
 
+.message-back {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+}
+
 .signup__btn-auth-disabled:disabled,
 .signin__btn-auth-disabled:disabled {
   opacity: 0.3;

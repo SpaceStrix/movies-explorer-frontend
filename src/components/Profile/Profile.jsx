@@ -2,11 +2,14 @@ import "./Profile.css";
 
 import { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useForm } from "react-hook-form";
 
-export const Profile = ({ logOut, onUpdateUserInfo }) => {
+export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  const [isValid, setIsValid] = useState(true);
 
   const handleChangeName = e => setName(e.target.value);
   const handleChangeEmail = e => setEmail(e.target.value);
@@ -25,6 +28,8 @@ export const Profile = ({ logOut, onUpdateUserInfo }) => {
       email,
     });
   };
+
+  // const messageErr = isValid ? "" : errAuth;
 
   return (
     <>
@@ -67,7 +72,11 @@ export const Profile = ({ logOut, onUpdateUserInfo }) => {
                 />
               </label>
             </fieldset>
-            <button className="profile__btn-edit" type="submit">
+            <button
+              className="profile__btn-edit"
+              type="submit"
+              // disabled={isValid}
+            >
               Редактировать
             </button>
           </form>

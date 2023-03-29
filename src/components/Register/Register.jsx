@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import { NavLink, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-export const Register = ({ loggedIn, onRegistration }) => {
+export const Register = ({ loggedIn, onRegistration, errAuth }) => {
   const {
     register,
     handleSubmit,
@@ -15,6 +15,8 @@ export const Register = ({ loggedIn, onRegistration }) => {
     onRegistration(data);
     reset();
   };
+
+  const messageErr = isValid ? "" : errAuth;
 
   if (loggedIn) return <Navigate to={"/"} />;
 
@@ -86,6 +88,7 @@ export const Register = ({ loggedIn, onRegistration }) => {
                 {errors?.password?.message}
               </span>
             </label>
+            <span className="message-back">{messageErr}</span>
           </fieldset>
           <button
             className="signup__btn-auth signup__btn-auth-disabled btn btn_effect"
