@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 
 import { SearchForm } from "../Movies/SearchForm/SearchForm";
 import { MoviesCardList } from "../Movies/MoviesCardList/MoviesCardList";
-
+import { Preloader } from "../Preloader/Preloader";
 import { filtersMovies, filtersMoviesDuration } from "../../utils/utils";
 
-import { Preloader } from "../Preloader/Preloader";
-
-export const Movies = ({ moviesAll, onCardLike, onRemoveMovie }) => {
+export const Movies = ({
+  moviesAll,
+  onCardLike,
+  onRemoveMovie,
+  savedMovies,
+}) => {
   //b useState
   const [loading, setLoading] = useState(true); // Состояние загрузки
   const [searchQuery, setSearchQuery] = useState(
@@ -23,9 +26,12 @@ export const Movies = ({ moviesAll, onCardLike, onRemoveMovie }) => {
     localStorage.getItem("checked") === "true"
   );
 
+  const [emptyQuery, setEmptyQuery] = useState(false);
+
   useEffect(() => {
     localStorage.setItem("allMovies", JSON.stringify(moviesAll));
   }, [moviesAll]);
+
   useEffect(() => {
     setLoading(true);
     if (JSON.parse(localStorage.getItem("filteredMovies")) === null) {
@@ -61,11 +67,16 @@ export const Movies = ({ moviesAll, onCardLike, onRemoveMovie }) => {
     );
     const filtered = checkedShort ? durationFilteredMovies : allFilteredMovie;
 
-    setFilterMovies(filtered);
-
-    localStorage.setItem("filteredMovies", JSON.stringify(filtered));
-    localStorage.setItem("searchQuery", searchQuery); //* сохраням строку поиска в стор
-    localStorage.setItem("checked", checkedShort); //* сохраням строку поиска в стор
+    if (searchQuery === "" || searchQuery === null) {
+      searchQuery = "";
+      setEmptyQuery(true);
+    } else {
+      setEmptyQuery(false);
+      setFilterMovies(filtered);
+      localStorage.setItem("filteredMovies", JSON.stringify(filtered));
+      localStorage.setItem("searchQuery", searchQuery); //* сохраням строку поиска в стор
+      localStorage.setItem("checked", checkedShort); //* сохраням строку поиска в стор
+    }
   };
 
   return (
@@ -77,17 +88,20 @@ export const Movies = ({ moviesAll, onCardLike, onRemoveMovie }) => {
           searchQuery={searchQuery}
           checkedShort={checkedShort}
           setCheckBox={setCheckBox}
+          emptyQuery={emptyQuery}
         />
         {loading ? (
           <Preloader />
         ) : (
           <MoviesCardList
-            onCardLike={onCardLike}
-            onRemoveMovie={onRemoveMovie}
             setNotFoundMovie={setNotFoundMovie}
             checkedShort={checkedShort}
-            filterMovies={filterMovies}
             notFoundMovie={notFoundMovie}
+            //
+            onCardLike={onCardLike}
+            onRemoveMovie={onRemoveMovie}
+            filterMovies={filterMovies}
+            savedMovies={savedMovies}
           />
         )}
       </main>

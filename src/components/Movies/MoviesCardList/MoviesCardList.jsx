@@ -7,17 +7,14 @@ export const MoviesCardList = ({
   notFoundMovie,
   onCardLike,
   onRemoveMovie,
+  isSaved,
+  savedMovies,
 }) => {
   const [width, setWidth] = useState(window.innerWidth);
   const [addMore, setAddMore] = useState(0);
   const [sliceData, setSliceData] = useState([]);
   const [hiddenButton, setHiddenButton] = useState(false);
-
-  // const sizeWidth = {
-  //   large: width >= 769,
-  //   medium: width >= 469 && width <= 768,
-  //   small: width >= 320 && width <= 468,
-  // };
+  // const [isEmpyArray, setIsEmptyArray] = useState(false);
 
   useEffect(() => {
     const handleResize = e => {
@@ -61,19 +58,22 @@ export const MoviesCardList = ({
           <p className="moviecardlist-notfound">«Ничего не найдено»</p>
         ) : (
           <ul className="moviecardlist__items">
-            {sliceData.map(card => {
+            {sliceData.map(movie => {
               return (
                 <MoviesCard
-                  card={card}
-                  filterMovies={filterMovies}
-                  key={card._id || card.id}
+                  movie={movie}
+                  sliceData={filterMovies}
+                  key={movie._id || movie.id}
                   onCardLike={onCardLike}
                   onRemoveMovie={onRemoveMovie}
+                  isSaved={isSaved}
+                  savedMovies={savedMovies}
                 />
               );
             })}
           </ul>
         )}
+        {/* moviecardlist__more */}
         <div className="moviecardlist__more">
           {hiddenButton ? (
             <button

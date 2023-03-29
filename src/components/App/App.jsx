@@ -69,30 +69,37 @@ export const App = () => {
   // Запросы
   useEffect(() => {
     if (loggedIn) {
-      mainApi
-        .getUserInfoFromServer()
-        .then(userData => {
-          setLoggedIn(true);
-          setCurrentUser(userData);
-        })
-        .catch(err => {
-          console.error(err);
-        });
-      // Сохраненные фильмы
-      mainApi
-        .getSavedMovies()
-        .then(data => {
-          setSevedMovies(data);
-        })
-        .catch(err => {
-          console.error(err);
-        });
+      // mainApi
+      //   .getUserInfoFromServer()
+      //   .then(userData => {
+      //     setLoggedIn(true);
+      //     setCurrentUser(userData);
+      //   })
+      //   .catch(err => {
+      //     console.error(err);
+      //   });
+      // // Сохраненные фильмы
+      // mainApi
+      //   .getSavedMovies()
+      //   .then(data => {
+      //     setSevedMovies(data);
+      //   })
+      //   .catch(err => {
+      //     console.error(err);
+      //   });
 
-      // Получаем все фильмы
+      mainApi
+        .getInitialData()
+        .then(([getSavedMovies, getUserInfoFromServer]) => {
+          setSevedMovies(getSavedMovies);
+          setCurrentUser(getUserInfoFromServer);
+        })
+        .catch(err => {
+          console.error(err);
+        });
       moviesApi
         .getAllMovies()
         .then(dataMovies => {
-          // localStorage.setItem("allMovies", JSON.stringify(dataMovies));
           setMoviesAll(dataMovies);
         })
         .catch(err => {
@@ -163,7 +170,6 @@ export const App = () => {
   //
 
   const handleCardLike = movie => {
-    // const isLiked = savedMovies.some(whoLiked => whoLiked.movieId === movie.id);
     mainApi
       .likeMovie(movie)
       .then(newMovie => {
@@ -174,15 +180,16 @@ export const App = () => {
       });
   };
 
-  const handleCardRemove = movie_id => {
-    console.log(movie_id);
+  const handleCardRemove = movie => {
+    const returnMovie = movie._id
+      ? movie
+      : savedMovies.find(i => i.movieId === movie.id);
     mainApi
-      .removeCard(movie_id)
+      .removeCard(returnMovie._id)
       .then(() => {
-        const isLiked = savedMovies.filter(item => {
-          return item.movieId !== movie_id.id;
-        });
-        setSevedMovies(isLiked);
+        setSevedMovies(
+          savedMovies.filter(item => item._id !== returnMovie._id)
+        );
       })
       .catch(err => {
         console.error(err);
@@ -223,6 +230,7 @@ export const App = () => {
                     moviesAll={moviesAll}
                     onCardLike={handleCardLike}
                     onRemoveMovie={handleCardRemove}
+                    savedMovies={savedMovies}
                   />
                 </ProtectedRoute>
               }
@@ -232,7 +240,6 @@ export const App = () => {
               element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <SavedMovies
-                    onCardLike={handleCardLike}
                     savedMovies={savedMovies}
                     onRemoveMovie={handleCardRemove}
                   />

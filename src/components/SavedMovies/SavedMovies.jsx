@@ -5,19 +5,32 @@ import { MoviesCardList } from "../Movies/MoviesCardList/MoviesCardList";
 import { filtersMovies, filtersMoviesDuration } from "../../utils/utils";
 import { Preloader } from "../Preloader/Preloader";
 
-export const SavedMovies = ({ savedMovies, onCardLike, onRemoveMovie }) => {
-  const [searchQuery, setSearchQuery] = useState(
-    localStorage.getItem("searchQuery")
-  );
+export const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [notFoundMovie, setNotFoundMovie] = useState(false); // Если нет резульатов поиска
-  const [checkedShort, setCheckBox] = useState(
-    localStorage.getItem("checked") === "true"
-  );
+  const [checkedShort, setCheckBox] = useState(false);
+  const [loading, setLoading] = useState(true); // Состояние загрузки
   const [savedMov, setSavedMov] = useState([]);
 
   useEffect(() => {
     setSavedMov(savedMovies);
   }, [savedMovies]);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("filteredMovies")) === null) {
+      setNotFoundMovie(false);
+    } else {
+      if (savedMov.length === 0) {
+        setNotFoundMovie(true);
+      } else {
+        setNotFoundMovie(false);
+      }
+    }
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [savedMov]);
 
   //b Сабмит формы
   const onHandleSearchForm = (searchQuery, checkedShort) => {
@@ -36,11 +49,7 @@ export const SavedMovies = ({ savedMovies, onCardLike, onRemoveMovie }) => {
     const filtered = checkedShort ? durationFilteredMovies : allFilteredMovie;
 
     setSavedMov(filtered);
-
-    // localStorage.setItem("searchQuery", searchQuery); //* сохраням строку поиска в стор
-    // localStorage.setItem("checked", checkedShort); //* сохраням строку поиска в стор
   };
-
   return (
     <main className="main">
       <section className="savedmovies">
@@ -52,14 +61,18 @@ export const SavedMovies = ({ savedMovies, onCardLike, onRemoveMovie }) => {
           setCheckBox={setCheckBox}
         />
 
-        <MoviesCardList
-          setNotFoundMovie={setNotFoundMovie}
-          checkedShort={checkedShort}
-          filterMovies={savedMov}
-          notFoundMovie={notFoundMovie}
-          onCardLike={onCardLike}
-          onRemoveMovie={onRemoveMovie}
-        />
+        {loading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            // setNotFoundMovie={setNotFoundMovie}
+            // checkedShort={checkedShort}
+            notFoundMovie={notFoundMovie}
+            filterMovies={savedMov}
+            savedMov={savedMov}
+            onRemoveMovie={onRemoveMovie}
+          />
+        )}
       </section>
     </main>
   );

@@ -4,57 +4,65 @@ import { useLocation } from "react-router-dom";
 import { numbetToTime } from "../../../utils/utils";
 
 export const MoviesCard = ({
-  card,
-  filterMovies,
+  movie,
   onCardLike,
   onRemoveMovie,
+  savedMovies,
 }) => {
   const location = useLocation();
 
-  const isLiked = filterMovies.some(item => item);
-  // console.log(card.movieId);
+  const likedMovie = movie =>
+    savedMovies.some(item => item.movieId === movie.id);
 
-  const cardLikeButtonClassName = `card__like ${
-    isLiked ? "card__like_active" : " "
-  }`;
+  const toggleStateLike = () =>
+    likedMovie(movie) ? onRemoveMovie(movie) : onCardLike(movie);
 
-  const toggleStateLike = () => {
-    if (!isLiked) {
-      handleRemoveCard();
-    } else {
-      handleLikeCard(card);
-    }
-  };
-
-  const handleLikeCard = () => onCardLike(card);
-  const handleRemoveCard = () => onRemoveMovie(card._id);
-
-  const locationImage =
-    location.pathname === "/saved-movies"
-      ? `${card.image}`
-      : `https://api.nomoreparties.co/${card.image.url}`;
+  const onDeleteClickHandler = () => onRemoveMovie(movie);
 
   return (
     <>
-      <li className="card">
-        <a href={card.trailerLink} target="_blank" rel="noreferrer">
-          <img src={locationImage} alt={card.nameRU} className="card__img" />
-        </a>
-        <div className="card__content">
-          <div className="card__info">
-            <h2 className="card__title">{card.nameRU}</h2>
-            <p className="card__duration">{numbetToTime(card.duration)}</p>
+      {location.pathname === "/saved-movies" ? (
+        <li className="card">
+          <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+            <img src={movie.image} alt={movie.nameRU} className="card__img" />
+          </a>
+          <div className="card__content">
+            <div className="card__info">
+              <h2 className="card__title">{movie.nameRU}</h2>
+              <p className="card__duration">{numbetToTime(movie.duration)}</p>
+            </div>
+            <button
+              className="card__remove"
+              aria-label="Кнопка дизлайка"
+              type="button"
+              onClick={onDeleteClickHandler}
+            ></button>
           </div>
-          <button
-            className={cardLikeButtonClassName}
-            aria-label="Кнопка лайка"
-            type="button"
-            onClick={toggleStateLike}
-          ></button>
-        </div>
-      </li>
+        </li>
+      ) : (
+        <li className="card">
+          <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+            <img
+              src={`https://api.nomoreparties.co/${movie.image.url}`}
+              alt={movie.nameRU}
+              className="card__img"
+            />
+          </a>
+          <div className="card__content">
+            <div className="card__info">
+              <h2 className="card__title">{movie.nameRU}</h2>
+              <p className="card__duration">{numbetToTime(movie.duration)}</p>
+            </div>
+
+            <button
+              className={likedMovie(movie) ? "card__like_active" : "card__like"}
+              aria-label="Кнопка лайка"
+              type="button"
+              onClick={toggleStateLike}
+            ></button>
+          </div>
+        </li>
+      )}
     </>
   );
 };
-
-// export default MoviesCard;

@@ -6,6 +6,7 @@ export const SearchForm = ({
   checkedShort,
   searchQuery,
   setCheckBox,
+  emptyQuery,
 }) => {
   const handleSubmit = e => {
     e.preventDefault();
@@ -19,6 +20,8 @@ export const SearchForm = ({
     onHandleSearchForm(searchQuery, !checkedShort);
     setCheckBox(!checkedShort);
   };
+
+  const queryErr = emptyQuery ? "emptyQuery" : "emptyQuery_hidden";
 
   return (
     <section className="seachform">
@@ -56,6 +59,7 @@ export const SearchForm = ({
             />
             <p className="seachform-check__text">Короткометражки</p>
           </fieldset>
+          <span className={queryErr}>«Нужно ввести ключевое слово»</span>
         </form>
       </div>
     </section>

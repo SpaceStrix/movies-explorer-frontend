@@ -90,9 +90,9 @@ class MainApi {
     });
   }
 
-  // getInitialData() {
-  //   return Promise.all([this.getSavedMovies(), this.getUserInfoFromServer()]);
-  // }
+  getInitialData() {
+    return Promise.all([this.getSavedMovies(), this.getUserInfoFromServer()]);
+  }
 }
 
 const configApi = "http://localhost:3005";

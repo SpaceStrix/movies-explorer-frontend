@@ -102,6 +102,20 @@
   width: 100%;
 }
 
+.emptyQuery {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #ee3465;
+  position: absolute;
+  right: 45%;
+  top: 172px;
+}
+
+.emptyQuery_hidden {
+  opacity: 0;
+}
+
 @media screen and (max-width: 768px) {
   .seachform-container {
     width: calc(100% - 30px * 2);
