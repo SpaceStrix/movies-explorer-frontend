@@ -3,14 +3,20 @@ import "./Profile.css";
 import { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useForm } from "react-hook-form";
+import { emailRegEx } from "../../utils/variable";
 
 export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [btnEditClose, setBtnEditClose] = useState(false);
+  const [dataDone, setDataDone] = useState(false);
 
-  const [isValid, setIsValid] = useState(true);
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
   const handleChangeName = e => setName(e.target.value);
   const handleChangeEmail = e => setEmail(e.target.value);
 
@@ -20,16 +26,25 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
   }, [currentUser]);
 
   // Обновляем данные пользователя
-  const handleSubmit = e => {
-    e.preventDefault();
-
+  const onSubmit = e => {
     onUpdateUserInfo({
       name,
       email,
     });
+    setDataDone(true);
   };
 
-  // const messageErr = isValid ? "" : errAuth;
+  useEffect(() => {
+    if (
+      (name.trim() === currentUser.name && email === currentUser.email) ||
+      name.trim().length <= 1 ||
+      email.length <= 2
+    ) {
+      setBtnEditClose(true);
+    } else {
+      setBtnEditClose(false);
+    }
+  }, [name, currentUser.name, email, currentUser.email]);
 
   return (
     <>
@@ -39,7 +54,7 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
             action=""
             className="profile-form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <fieldset className="profile__group">
               <legend className="profile__title">
@@ -51,31 +66,59 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   id="profile__name"
                   name="name"
                   type="name"
-                  placeholder={currentUser.name}
                   className="profile__input"
-                  required
                   value={name || ""}
-                  onChange={handleChangeName}
+                  {...register("name", {
+                    required: "Поле Name обязательное",
+                    minLength: {
+                      value: 1,
+                      message: `Минимальная длина имени 2 символа`,
+                    },
+                    onChange: e => handleChangeName(e),
+                  })}
                 />
+                <span className="input-error-message input-error-message-profile">
+                  {errors?.name?.message}
+                </span>
               </label>
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
               <label htmlFor="profile__email" className="profile__lable">
                 <span className="profile__input-title">Email</span>
                 <input
                   id="profile__email"
                   name="email"
                   type="email"
-                  placeholder={currentUser.email}
                   className="profile__input"
-                  required
                   value={email || ""}
-                  onChange={handleChangeEmail}
+                  {...register("email", {
+                    required: "Поле email обязательное",
+                    pattern: {
+                      value: emailRegEx,
+                      message: "Невалидный email",
+                    },
+                    onChange: e => handleChangeEmail(e),
+                  })}
                 />
+                <span className="input-error-message input-error-message-profile">
+                  {errors?.email?.message}
+                </span>
               </label>
             </fieldset>
+            {dataDone ? <p>{isValid} Данные обновлены</p> : null}
             <button
               className="profile__btn-edit"
               type="submit"
-              // disabled={isValid}
+              disabled={btnEditClose || !isValid}
             >
               Редактировать
             </button>

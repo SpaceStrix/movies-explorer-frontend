@@ -11,6 +11,7 @@ export const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
   const [checkedShort, setCheckBox] = useState(false);
   const [loading, setLoading] = useState(true); // Состояние загрузки
   const [savedMov, setSavedMov] = useState([]);
+  const [emptyQuery, setEmptyQuery] = useState(false);
 
   useEffect(() => {
     setSavedMov(savedMovies);
@@ -48,7 +49,15 @@ export const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
     );
     const filtered = checkedShort ? durationFilteredMovies : allFilteredMovie;
 
-    setSavedMov(filtered);
+    if (searchQuery === "" || searchQuery === null) {
+      searchQuery = "";
+      setEmptyQuery(true);
+    } else {
+      setEmptyQuery(false);
+      setSavedMov(filtered);
+    }
+
+    // setSavedMov(filtered);
   };
   return (
     <main className="main">
@@ -59,6 +68,7 @@ export const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
           searchQuery={searchQuery}
           checkedShort={checkedShort}
           setCheckBox={setCheckBox}
+          emptyQuery={emptyQuery}
         />
 
         {loading ? (

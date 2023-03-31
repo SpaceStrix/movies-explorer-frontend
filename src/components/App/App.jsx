@@ -70,34 +70,34 @@ export const App = () => {
   //b Запросы
   useEffect(() => {
     if (loggedIn) {
-      // mainApi
-      //   .getUserInfoFromServer()
-      //   .then(userData => {
-      //     setLoggedIn(true);
-      //     setCurrentUser(userData);
-      //   })
-      //   .catch(err => {
-      //     console.error(err);
-      //   });
-      // // Сохраненные фильмы
-      // mainApi
-      //   .getSavedMovies()
-      //   .then(data => {
-      //     setSevedMovies(data);
-      //   })
-      //   .catch(err => {
-      //     console.error(err);
-      //   });
-
       mainApi
-        .getInitialData()
-        .then(([getSavedMovies, getUserInfoFromServer]) => {
-          setSevedMovies(getSavedMovies);
-          setCurrentUser(getUserInfoFromServer);
+        .getUserInfoFromServer()
+        .then(userData => {
+          setLoggedIn(true);
+          setCurrentUser(userData);
         })
         .catch(err => {
           console.error(err);
         });
+      // Сохраненные фильмы
+      mainApi
+        .getSavedMovies()
+        .then(data => {
+          setSevedMovies(data);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+
+      // mainApi
+      //   .getInitialData()
+      //   .then(([getSavedMovies, getUserInfoFromServer]) => {
+      //     setSevedMovies(getSavedMovies);
+      //     setCurrentUser(getUserInfoFromServer);
+      //   })
+      //   .catch(err => {
+      //     console.error(err);
+      //   });
       moviesApi
         .getAllMovies()
         .then(dataMovies => {
@@ -115,20 +115,6 @@ export const App = () => {
     navigate("/");
   }, []);
 
-  //b Регистрация
-  const onRegistration = ({ name, email, password }) => {
-    auth
-      .register({ name, email, password })
-      .then(data => {
-        setLoading(true);
-        navigate("/signin");
-        return data;
-      })
-      .catch(err => {
-        setErrAuth(err);
-      })
-      .finally(() => setLoading(false));
-  };
   //b Авторизация
   const onLogin = ({ password, email }) => {
     auth
@@ -149,6 +135,21 @@ export const App = () => {
       })
       .finally(() => setLoading(false));
   };
+
+  //b Регистрация
+  const onRegistration = ({ name, email, password }) => {
+    auth
+      .register({ name, email, password })
+      .then(() => {
+        setLoading(true);
+        onLogin({ password, email });
+      })
+      .catch(err => {
+        setErrAuth(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
   //b Обновление профиля
   const handleUpdateUser = newData => {
     mainApi
