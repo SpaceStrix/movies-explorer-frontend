@@ -197,7 +197,7 @@ export const App = () => {
     localStorage.removeItem("filteredMovies");
     setLoggedIn(false);
     setCurrentUser({});
-    navigate("signin");
+    navigate("/");
   };
 
   useEffect(() => {
