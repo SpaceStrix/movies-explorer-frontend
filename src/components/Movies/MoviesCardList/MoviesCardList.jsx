@@ -2,6 +2,12 @@ import "./MoviesCardList.css";
 import { MoviesCard } from "../MoviesCard/MoviesCard";
 import { useState, useEffect } from "react";
 
+import {
+  LARGE_SCREEN,
+  MEDIUM_SCREEN,
+  SMALL_SCREEN,
+} from "../../../utils/constants";
+
 export const MoviesCardList = ({
   filterMovies,
   notFoundMovie,
@@ -27,24 +33,24 @@ export const MoviesCardList = ({
 
   const len = filterMovies.length;
   useEffect(() => {
-    if (width >= 1031) {
-      setSliceData(filterMovies.slice(0, 12));
-      setAddMore(3);
-      if (filterMovies.length > 12) {
+    if (width >= LARGE_SCREEN.MIN_WIDTH) {
+      setSliceData(filterMovies.slice(0, LARGE_SCREEN.START_CARD));
+      setAddMore(LARGE_SCREEN.ADD_CARD);
+      if (filterMovies.length > LARGE_SCREEN.START_CARD) {
         setHiddenButton(true);
       }
     }
-    if (width >= 469 && width <= 1030) {
-      setSliceData(filterMovies.slice(0, 8));
-      setAddMore(2);
-      if (filterMovies.length > 8) {
+    if (width >= MEDIUM_SCREEN.MIN_WIDTH && width <= MEDIUM_SCREEN.MAX_WIDTH) {
+      setSliceData(filterMovies.slice(0, MEDIUM_SCREEN.START_CARD));
+      setAddMore(MEDIUM_SCREEN.ADD_CARD);
+      if (filterMovies.length > MEDIUM_SCREEN.START_CARD) {
         setHiddenButton(true);
       }
     }
-    if (width >= 320 && width <= 468) {
-      setSliceData(filterMovies.slice(0, 5));
-      setAddMore(1);
-      if (filterMovies.length > 5) {
+    if (width >= SMALL_SCREEN.MIN_WIDTH && width <= SMALL_SCREEN.MAX_WIDTH) {
+      setSliceData(filterMovies.slice(0, SMALL_SCREEN.START_CARD));
+      setAddMore(SMALL_SCREEN.ADD_CARD);
+      if (filterMovies.length > SMALL_SCREEN.START_CARD) {
         setHiddenButton(true);
       }
     }
@@ -81,7 +87,7 @@ export const MoviesCardList = ({
               onClick={() => {
                 setSliceData(filterMovies.slice(0, sliceData.length + addMore));
                 if (sliceData.length === len) {
-                  alert("Конец списка");
+                  // alert("Конец списка");
                   setHiddenButton(false);
                 }
               }}

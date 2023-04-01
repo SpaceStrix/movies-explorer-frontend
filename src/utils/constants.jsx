@@ -4,6 +4,21 @@ export const EMAIL_REGEX =
 
 export const MOVIE_DURATION = 40;
 
-export const LARGE_SCREEN = 1031;
-export const MEDIUM_SCREEN = 469;
-export const SMALL_SCREEN = 320;
+export const LARGE_SCREEN = {
+  START_CARD: 12,
+  ADD_CARD: 3,
+  MIN_WIDTH: 1031,
+};
+export const MEDIUM_SCREEN = {
+  START_CARD: 8,
+  ADD_CARD: 2,
+  MIN_WIDTH: 469,
+  MAX_WIDTH: 1030,
+};
+
+export const SMALL_SCREEN = {
+  START_CARD: 5,
+  ADD_CARD: 2,
+  MIN_WIDTH: 320,
+  MAX_WIDTH: 468,
+};

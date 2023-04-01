@@ -84,6 +84,8 @@
 }
 
 .dataDone {
+  position: absolute;
+  left: 48%;
   font-weight: 500;
   color: #34ee43;
   font-size: 13px;

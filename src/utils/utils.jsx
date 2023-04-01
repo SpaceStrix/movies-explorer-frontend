@@ -7,9 +7,11 @@ const numbetToTime = duration => {
 };
 
 //b Сортировка по запросу
-const filtersMovies = (searchQuery, moviesAll, setNotFoundMovie) => {
+const filtersMovies = (searchQuery, moviesAll) => {
   const filter = moviesAll.filter(movie => {
-    return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase() || "");
+    return movie.nameRU
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase() || "".toLowerCase());
   });
   return filter;
 };
@@ -18,7 +20,9 @@ const filtersMovies = (searchQuery, moviesAll, setNotFoundMovie) => {
 const filtersMoviesDuration = (searchQuery, checkedShort, moviesAll) => {
   const filterDuration = moviesAll.filter(movie => {
     return (
-      movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase() || "") &&
+      movie.nameRU
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase() || "".toLowerCase()) &&
       checkedShort &&
       movie.duration <= MOVIE_DURATION
     );
