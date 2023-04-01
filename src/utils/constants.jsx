@@ -20,5 +20,5 @@ export const SMALL_SCREEN = {
   START_CARD: 5,
   ADD_CARD: 2,
   MIN_WIDTH: 320,
-  MAX_WIDTH: 468,
+  MAX_WIDTH: 645,
 };
