@@ -54,10 +54,8 @@ export const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
       setEmptyQuery(true);
     } else {
       setEmptyQuery(false);
-      setSavedMov(filtered);
     }
-
-    // setSavedMov(filtered);
+    setSavedMov(filtered);
   };
   return (
     <main className="main">
