@@ -37,7 +37,7 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
   useEffect(() => {
     if (
       (name.trim() === currentUser.name && email === currentUser.email) ||
-      name.trim().length <= 1 ||
+      name.trim().length < 2 ||
       email.length <= 2
     ) {
       setBtnEditClose(true);
@@ -69,9 +69,10 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   className="profile__input"
                   value={name || ""}
                   {...register("name", {
+                    // required: "Поле Name обязательное",
                     message: "Поле Name обязательное",
                     minLength: {
-                      value: 1,
+                      value: 2,
                       message: `Минимальная длина имени 2 символа`,
                     },
                     onChange: e => handleChangeName(e),
@@ -92,6 +93,7 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   className="profile__input"
                   value={email || ""}
                   {...register("email", {
+                    // required: "Поле email обязательное",
                     message: "Поле email обязательное",
                     pattern: {
                       value: EMAIL_REGEX,
