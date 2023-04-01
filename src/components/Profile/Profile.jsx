@@ -109,9 +109,7 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                 </span>
               </label>
             </fieldset>
-            {dataDone ? (
-              <p className="dataDone"> {isValid} Данные обновлены</p>
-            ) : null}
+            {dataDone ? <p className="dataDone">Данные обновлены</p> : null}
             <button
               className="profile__btn-edit"
               type="submit"

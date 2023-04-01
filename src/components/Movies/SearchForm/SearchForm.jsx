@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./SearchForm.css";
 
 export const SearchForm = ({
@@ -6,11 +7,15 @@ export const SearchForm = ({
   checkedShort,
   searchQuery,
   setCheckBox,
-  emptyQuery,
 }) => {
+  const [emptyQuery, setEmptyQuery] = useState(false);
+
   const handleSubmit = e => {
     e.preventDefault();
-    onHandleSearchForm(searchQuery, checkedShort);
+
+    !searchQuery
+      ? setEmptyQuery(true)
+      : onHandleSearchForm(searchQuery, checkedShort);
   };
 
   const handleChange = e => {
@@ -39,7 +44,9 @@ export const SearchForm = ({
                 type="text"
                 name="search"
                 value={searchQuery || ""}
-                onChange={e => setSearchQuery(e.target.value)}
+                onChange={e =>
+                  setSearchQuery(e.target.value) || setEmptyQuery(false)
+                }
                 className="seachform-stroke__input"
                 placeholder="Фильм"
               />
@@ -49,6 +56,7 @@ export const SearchForm = ({
               type="submit"
             ></button>
           </fieldset>
+          <span className={queryErr}>«Нужно ввести ключевое слово»</span>
           <fieldset className="seachform-check">
             <input
               type="checkbox"
@@ -59,7 +67,6 @@ export const SearchForm = ({
             />
             <p className="seachform-check__text">Короткометражки</p>
           </fieldset>
-          <span className={queryErr}>«Нужно ввести ключевое слово»</span>
         </form>
       </div>
     </section>

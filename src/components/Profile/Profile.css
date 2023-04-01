@@ -92,6 +92,10 @@
   line-height: 16px;
 }
 
+.dataDone_hidden {
+  opacity: 0;
+}
+
 .input-error-message-profile {
   top: 15px;
   bottom: 0;
