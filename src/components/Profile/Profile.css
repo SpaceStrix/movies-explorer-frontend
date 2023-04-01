@@ -83,6 +83,13 @@
   cursor: pointer;
 }
 
+.dataDone {
+  font-weight: 500;
+  color: #34ee43;
+  font-size: 13px;
+  line-height: 16px;
+}
+
 .input-error-message-profile {
   top: 15px;
   bottom: 0;

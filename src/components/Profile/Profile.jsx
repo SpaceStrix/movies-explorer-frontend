@@ -12,6 +12,9 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
   const [btnEditClose, setBtnEditClose] = useState(false);
   const [dataDone, setDataDone] = useState(false);
 
+  const [emptyName, setEmptyName] = useState(false);
+  const [emptyEmail, setEmptyEmail] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -44,6 +47,9 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
     } else {
       setBtnEditClose(false);
     }
+
+    !name ? setEmptyName(true) : setEmptyName(false);
+    !email ? setEmptyEmail(true) : setEmptyEmail(false);
   }, [name, currentUser.name, email, currentUser.email]);
 
   return (
@@ -69,8 +75,6 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   className="profile__input"
                   value={name || ""}
                   {...register("name", {
-                    // required: "Поле Name обязательное",
-                    message: "Поле Name обязательное",
                     minLength: {
                       value: 2,
                       message: `Минимальная длина имени 2 символа`,
@@ -79,11 +83,10 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   })}
                 />
                 <span className="input-error-message input-error-message-profile">
+                  {emptyName ? "Обязательное поле" : ""}
                   {errors?.name?.message}
                 </span>
               </label>
-              {/*  */}
-
               <label htmlFor="profile__email" className="profile__lable">
                 <span className="profile__input-title">Email</span>
                 <input
@@ -93,8 +96,6 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   className="profile__input"
                   value={email || ""}
                   {...register("email", {
-                    // required: "Поле email обязательное",
-                    message: "Поле email обязательное",
                     pattern: {
                       value: EMAIL_REGEX,
                       message: "Невалидный email",
@@ -103,11 +104,14 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   })}
                 />
                 <span className="input-error-message input-error-message-profile">
+                  {emptyEmail ? "Обязательное поле" : ""}
                   {errors?.email?.message}
                 </span>
               </label>
             </fieldset>
-            {dataDone ? <p>{isValid} Данные обновлены</p> : null}
+            {dataDone ? (
+              <p className="dataDone"> {isValid} Данные обновлены</p>
+            ) : null}
             <button
               className="profile__btn-edit"
               type="submit"
