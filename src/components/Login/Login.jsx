@@ -4,6 +4,8 @@ import logo from "../../images/logo.svg";
 import { NavLink, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+import { EMAIL_REGEX } from "../../utils/constants";
+
 export const Login = ({ onLogin, loggedIn, errAuth }) => {
   const {
     register,
@@ -44,7 +46,7 @@ export const Login = ({ onLogin, loggedIn, errAuth }) => {
                 {...register("email", {
                   required: "Поле email обязательное",
                   pattern: {
-                    value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                    value: EMAIL_REGEX,
                     message: "Невалидный email",
                   },
                 })}

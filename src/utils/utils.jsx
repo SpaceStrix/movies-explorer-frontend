@@ -1,3 +1,5 @@
+import { MOVIE_DURATION } from "./constants";
+
 const numbetToTime = duration => {
   const hours = Math.trunc(duration / 60);
   const minutes = duration % 60;
@@ -18,7 +20,7 @@ const filtersMoviesDuration = (searchQuery, checkedShort, moviesAll) => {
     return (
       movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase() || "") &&
       checkedShort &&
-      movie.duration <= 40
+      movie.duration <= MOVIE_DURATION
     );
   });
 

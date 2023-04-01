@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 
 import { NavLink, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { emailRegEx } from "../../utils/variable";
+import { EMAIL_REGEX } from "../../utils/constants";
 
 export const Register = ({ loggedIn, onRegistration, errAuth }) => {
   const {
@@ -60,7 +60,7 @@ export const Register = ({ loggedIn, onRegistration, errAuth }) => {
                 {...register("email", {
                   required: "Поле email обязательное",
                   pattern: {
-                    value: emailRegEx,
+                    value: EMAIL_REGEX,
                     message: "Невалидный email",
                   },
                 })}

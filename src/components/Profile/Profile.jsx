@@ -3,7 +3,7 @@ import "./Profile.css";
 import { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useForm } from "react-hook-form";
-import { emailRegEx } from "../../utils/variable";
+import { EMAIL_REGEX } from "../../utils/constants";
 
 export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
   const currentUser = useContext(CurrentUserContext);
@@ -69,7 +69,7 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   className="profile__input"
                   value={name || ""}
                   {...register("name", {
-                    required: "Поле Name обязательное",
+                    message: "Поле Name обязательное",
                     minLength: {
                       value: 1,
                       message: `Минимальная длина имени 2 символа`,
@@ -82,16 +82,7 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                 </span>
               </label>
               {/*  */}
-              {/*  */}
-              {/*  */}
-              {/*  */}
-              {/*  */}
-              {/*  */}
-              {/*  */}
-              {/*  */}
-              {/*  */}
-              {/*  */}
-              {/*  */}
+
               <label htmlFor="profile__email" className="profile__lable">
                 <span className="profile__input-title">Email</span>
                 <input
@@ -101,9 +92,9 @@ export const Profile = ({ logOut, onUpdateUserInfo, errAuth }) => {
                   className="profile__input"
                   value={email || ""}
                   {...register("email", {
-                    required: "Поле email обязательное",
+                    message: "Поле email обязательное",
                     pattern: {
-                      value: emailRegEx,
+                      value: EMAIL_REGEX,
                       message: "Невалидный email",
                     },
                     onChange: e => handleChangeEmail(e),
