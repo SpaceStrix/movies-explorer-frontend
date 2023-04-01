@@ -14,7 +14,6 @@ export const MoviesCardList = ({
   const [addMore, setAddMore] = useState(0);
   const [sliceData, setSliceData] = useState([]);
   const [hiddenButton, setHiddenButton] = useState(false);
-  // const [isEmpyArray, setIsEmptyArray] = useState(false);
 
   useEffect(() => {
     const handleResize = e => {
@@ -28,14 +27,14 @@ export const MoviesCardList = ({
 
   const len = filterMovies.length;
   useEffect(() => {
-    if (width >= 769) {
+    if (width >= 1031) {
       setSliceData(filterMovies.slice(0, 12));
       setAddMore(3);
       if (filterMovies.length > 12) {
         setHiddenButton(true);
       }
     }
-    if (width >= 469 && width <= 768) {
+    if (width >= 469 && width <= 1030) {
       setSliceData(filterMovies.slice(0, 8));
       setAddMore(2);
       if (filterMovies.length > 8) {
