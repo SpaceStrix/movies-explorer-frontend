@@ -1,10 +1,12 @@
 import "./Login.css";
 import logo from "../../images/logo.svg";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-export const Login = () => {
+import { EMAIL_REGEX } from "../../utils/constants";
+
+export const Login = ({ onLogin, loggedIn, errAuth }) => {
   const {
     register,
     handleSubmit,
@@ -12,9 +14,14 @@ export const Login = () => {
     reset,
   } = useForm({ mode: "onChange" });
   const onSubmit = data => {
-    JSON.stringify(data);
+    onLogin(data);
     reset();
   };
+
+  if (loggedIn) return <Navigate to={"/"} />;
+
+  const messageErr = isValid ? "" : errAuth;
+
   return (
     <div className="main">
       <section className="signin">
@@ -39,7 +46,7 @@ export const Login = () => {
                 {...register("email", {
                   required: "Поле email обязательное",
                   pattern: {
-                    value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                    value: EMAIL_REGEX,
                     message: "Невалидный email",
                   },
                 })}
@@ -67,6 +74,7 @@ export const Login = () => {
                 {errors?.password?.message}
               </span>
             </label>
+            <span className="message-back">{messageErr}</span>
           </fieldset>
           <button
             className="signin__btn-auth signin__btn-auth-disabled btn btn_effect"

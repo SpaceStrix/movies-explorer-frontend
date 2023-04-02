@@ -4,16 +4,20 @@ import logotype from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
 // state burger
-export const Header = ({ loggedIn }) => {
+export const Header = ({ loggedIn, locationPath }) => {
   return (
-    <header className="header">
-      <div className="header-container">
-        <Link to="/" className="header__logo">
-          <img src={logotype} alt="" />
-        </Link>
+    <>
+      {locationPath && (
+        <header className="header">
+          <div className="header-container">
+            <Link to="/" className="header__logo">
+              <img src={logotype} alt="" />
+            </Link>
 
-        <Navigation loggedIn={loggedIn} />
-      </div>
-    </header>
+            <Navigation loggedIn={loggedIn} />
+          </div>
+        </header>
+      )}
+    </>
   );
 };

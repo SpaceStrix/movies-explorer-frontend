@@ -1,10 +1,11 @@
 import "./Register.css";
 import logo from "../../images/logo.svg";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { EMAIL_REGEX } from "../../utils/constants";
 
-export const Register = () => {
+export const Register = ({ loggedIn, onRegistration, errAuth }) => {
   const {
     register,
     handleSubmit,
@@ -12,9 +13,13 @@ export const Register = () => {
     reset,
   } = useForm({ mode: "onChange" });
   const onSubmit = data => {
-    JSON.stringify(data);
+    onRegistration(data);
     reset();
   };
+
+  const messageErr = isValid ? "" : errAuth;
+
+  if (loggedIn) return <Navigate to={"/"} />;
 
   return (
     <div className="main">
@@ -32,6 +37,7 @@ export const Register = () => {
             <label htmlFor="name" className="signup__input-lable">
               Имя
               <input
+                autoComplete="off"
                 name="name"
                 type="name"
                 placeholder="Имя"
@@ -46,6 +52,7 @@ export const Register = () => {
             <label htmlFor="email" className="signup__input-lable">
               E-mail
               <input
+                autoComplete="off"
                 name="email"
                 type="text"
                 placeholder="Email"
@@ -53,7 +60,7 @@ export const Register = () => {
                 {...register("email", {
                   required: "Поле email обязательное",
                   pattern: {
-                    value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                    value: EMAIL_REGEX,
                     message: "Невалидный email",
                   },
                 })}
@@ -65,6 +72,7 @@ export const Register = () => {
             <label htmlFor="password" className="signup__input-lable">
               Пароль
               <input
+                autoComplete="off"
                 name="password"
                 type="password"
                 placeholder="Пароль"
@@ -81,6 +89,7 @@ export const Register = () => {
                 {errors?.password?.message}
               </span>
             </label>
+            <span className="message-back">{messageErr}</span>
           </fieldset>
           <button
             className="signup__btn-auth signup__btn-auth-disabled btn btn_effect"

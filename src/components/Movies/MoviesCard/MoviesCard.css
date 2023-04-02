@@ -8,7 +8,7 @@
 .card__img {
   display: block;
   width: 100%;
-  max-height: 203px;
+  height: 203px;
   object-fit: cover;
 }
 
@@ -44,9 +44,25 @@
   cursor: pointer;
   transition: all 0.3s linear;
 }
-/* активный лайк */
-.card__like:hover {
+
+.card__like_active {
+  margin: 4px 8px 8px;
+  width: 14px;
+  height: 12px;
   background: url(../../../images/like-active.svg) no-repeat center center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.card__remove {
+  margin: 4px 8px 8px;
+  width: 14px;
+  height: 12px;
+  background: url(../../../images/delete.svg) no-repeat center center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s linear;
 }
 
 @media screen and (max-width: 768px) {
